@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>朱玮韬 - 猪鼓励IP创始人</title>
+    <link rel="stylesheet" href="https://firstcard.cc/A/A43/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 跨平台UI系统 - 平台变量定义 */
+        :root {
+            /* 桌面端主题 */
+            --desktop-primary: #3498db;
+            --desktop-secondary: #9b59b6;
+            --desktop-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            --desktop-radius: 12px;
+            --desktop-transition: 0.4s ease;
+        }
+
+        .ios-theme {
+            /* iOS主题 */
+            --primary: #007AFF;
+            --secondary: #5856D6;
+            --shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            --radius: 10px;
+            --transition: 0.3s ease;
+        }
+
+        .android-theme {
+            /* Android主题 */
+            --primary: #1A73E8;
+            --secondary: #4285F4;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            --radius: 4px;
+            --transition: 0.2s ease;
+        }
+
+        /* 平台特定样式 */
+        .desktop-theme .hobby-item,
+        .desktop-theme .service-item,
+        .desktop-theme .project-item {
+            border-radius: var(--desktop-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all var(--desktop-transition);
+        }
+
+        .desktop-theme .hobby-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--desktop-shadow);
+        }
+
+        .ios-theme .hobby-item,
+        .ios-theme .service-item,
+        .ios-theme .project-item {
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: all var(--transition);
+        }
+
+        .ios-theme .hobby-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .android-theme .hobby-item,
+        .android-theme .service-item,
+        .android-theme .project-item {
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: all var(--transition);
+        }
+
+        .android-theme .hobby-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+        }
+
+        /* 平台特定按钮样式 */
+        .ios-theme .service-icon {
+            background: linear-gradient(135deg, #f2f2f7 0%, #e5e5ea 100%);
+        }
+
+        .android-theme .service-icon {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8eaed 100%);
+        }
+
+        .ios-theme .service-item:hover .service-icon {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .android-theme .service-item:hover .service-icon {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        /* 生活爱好部分美化 */
+        .hobbies {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .hobby-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .hobby-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .hobby-img img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .hobby-item:hover .hobby-img img {
+            transform: scale(1.05);
+        }
+        
+        .hobby-content {
+            padding: 25px;
+        }
+        
+        .hobby-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .hobby-content h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: #3498db;
+        }
+        
+        .hobby-content p {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        .hobby-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #3498db;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .hobby-link:hover {
+            color: #9b59b6;
+        }
+        
+        /* 服务项目部分美化 */
+        .services {
+            padding: 80px 0;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .service-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .service-item:hover:before {
+            transform: scaleX(1);
+        }
+        
+        .service-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .service-item:hover .service-icon {
+            background: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
+        }
+        
+        .service-icon i {
+            font-size: 2.2rem;
+            color: #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        .service-item:hover .service-icon i {
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .service-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 18px;
+            color: #2c3e50;
+        }
+        
+        .service-content p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .service-features {
+            list-style: none;
+        }
+        
+        .service-features li {
+            color: #555;
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .service-features li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #3498db;
+        }
+        
+        /* 猪鼓励艺术实验室部分美化 */
+        .projects {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .project-item {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.07);
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .project-img {
+            flex: 1 1 450px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        
+        .project-item:hover .project-img img {
+            transform: scale(1.03);
+        }
+        
+        .project-img:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 100%);
+            pointer-events: none;
+        }
+        
+        .project-info {
+            flex: 1 1 500px;
+            padding: 45px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-info h3 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .project-info h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            border-radius: 2px;
+        }
+        
+        .project-info p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+        
+        .project-details {
+            margin-top: auto;
+        }
+        
+        .project-details h4 {
+            font-size: 1.3rem;
+            color: #34495e;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .project-details h4:before {
+            content: '\f105';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 10px;
+            color: #3498db;
+        }
+        
+        .project-details ul {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .project-details li {
+            color: #555;
+            margin-bottom: 12px;
+            padding-left: 28px;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .project-details li:before {
+            content: '\f061';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #9b59b6;
+        }
+        
+        .character-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .character-badge {
+            background-color: #f1f5f9;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .character-badge i {
+            margin-right: 6px;
+            color: #3498db;
+        }
+        
+        .ip-products {
+            background: linear-gradient(135deg, #f5f7fa 0%, #eef2f7 100%);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .ip-products p {
+            color: #34495e;
+            font-size: 1.05rem;
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+        
+        .coming-soon {
+            display: inline-block;
+            margin-left: 10px;
+            background-color: #3498db;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        
+        /* 页脚联系方式样式 */
+        .contact-details {
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #f8f9fa;
+            border-radius: 12px;
+        }
+        
+        .contact-details h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .contact-detail-item {
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .contact-detail-item i {
+            font-size: 1.2rem;
+            color: #3498db;
+            margin-right: 12px;
+            margin-top: 3px;
+            min-width: 20px;
+        }
+        
+        .contact-detail-item p {
+            color: #555;
+            margin-bottom: 0;
+        }
+        
+        /* 服务项目链接样式 */
+        .service-link {
+            display: inline-block;
+            color: #3498db;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 8px 20px;
+            border: 2px solid #3498db;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        
+        .service-link:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .services-grid, .hobbies-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-item, .hobby-item, .project-item {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .project-info {
+                padding: 30px 25px;
+            }
+            
+            .project-info h3 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 巧克力跳跳跳加载动画 -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="chocolate-container">
+            <div class="chocolate chocolate-1">🍫</div>
+            <div class="chocolate chocolate-2">🍫</div>
+            <div class="chocolate chocolate-3">🍫</div>
+        </div>
+    </div>
+
+
+    
+    <style>
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .chocolate-container {
+            text-align: center;
+        }
+        
+        .chocolate {
+            font-size: 3rem;
+            display: inline-block;
+            margin: 0 10px;
+            animation: chocolateJump 1.5s ease-in-out infinite;
+        }
+        
+        .chocolate-1 {
+            animation-delay: 0s;
+        }
+        
+        .chocolate-2 {
+            animation-delay: 0.3s;
+        }
+        
+        .chocolate-3 {
+            animation-delay: 0.6s;
+        }
+        
+        @keyframes chocolateJump {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-30px) rotate(-10deg);
+            }
+            50% {
+                transform: translateY(-50px) rotate(10deg);
+            }
+            75% {
+                transform: translateY(-30px) rotate(-10deg);
+            }
+        }
+        
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+
+    </style>
+    
+    <!-- IP产品板块优化样式 -->
+    <style>
+        .ip-products {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe8cc 100%);
+        }
+        
+        .ip-products .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #8B4513;
+            margin-bottom: 50px;
+            font-weight: 500;
+        }
+        
+        .ip-products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .ip-product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ip-product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 69, 19, 0.2);
+        }
+        
+        .ip-product-card.featured {
+            border: 2px solid #D2691E;
+            background: linear-gradient(135deg, #fff, #fff5f5);
+        }
+        
+        .product-image {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .chocolate-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+        }
+        
+        .product-content h3 {
+            color: #8B4513;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .product-desc {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .product-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-tag {
+            background: linear-gradient(135deg, #FFE4E1, #FFF0F5);
+            color: #8B4513;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(139, 69, 19, 0.2);
+        }
+        
+        .product-status {
+            margin-bottom: 25px;
+        }
+        
+        .progress-bar {
+            background: #f0f0f0;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #D2691E, #FF8E53);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .status-text {
+            color: #8B4513;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .chocolate-btn {
+            background: linear-gradient(135deg, #D2691E, #FF8E53);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(210, 105, 30, 0.3);
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .chocolate-btn:hover {
+            background: linear-gradient(135deg, #A0522D, #D2691E);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(210, 105, 30, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .ip-products-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+            
+            .ip-product-card {
+                padding: 25px;
+            }
+        }
+    </style>
+    
+    <script>
+        // 平台检测
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isAndroid = /Android/.test(navigator.userAgent);
+        const isDesktop = !isIOS && !isAndroid;
+
+        // 平台UI主题应用
+        function applyPlatformUI() {
+            const body = document.body;
+            
+            // 清除现有主题类
+            body.classList.remove('desktop-theme', 'ios-theme', 'android-theme');
+            
+            // 应用对应平台的主题类
+            if (isIOS) {
+                body.classList.add('ios-theme');
+            } else if (isAndroid) {
+                body.classList.add('android-theme');
+            } else {
+                body.classList.add('desktop-theme');
+            }
+            
+            console.log('已应用主题:', isIOS ? 'iOS' : isAndroid ? 'Android' : '桌面端');
+        }
+
+        // 在页面加载时应用主题
+        document.addEventListener('DOMContentLoaded', function() {
+            applyPlatformUI();
+        });
+
+        // 可爱巧克力音效系统
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playCuteSound(type = 'click') {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            const filter = audioContext.createBiquadFilter();
+            
+            oscillator.connect(filter);
+            filter.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            filter.type = 'lowpass';
+            filter.Q.setValueAtTime(15, audioContext.currentTime);
+            
+            switch(type) {
+                case 'click': // 可爱的点击音效
+                    oscillator.type = 'sine';
+                    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                    oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
+                    gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+                    break;
+                    
+                case 'bounce': // 可爱的弹跳音效
+                    oscillator.type = 'triangle';
+                    oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
+                    oscillator.frequency.exponentialRampToValueAtTime(900, audioContext.currentTime + 0.08);
+                    oscillator.frequency.exponentialRampToValueAtTime(500, audioContext.currentTime + 0.15);
+                    gainNode.gain.setValueAtTime(0.12, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+                    break;
+                    
+                case 'pop': // 可爱的弹出音效
+                    oscillator.type = 'sine';
+                    oscillator.frequency.setValueAtTime(1000, audioContext.currentTime);
+                    oscillator.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.12);
+                    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.12);
+                    break;
+                    
+                case 'magic': // 可爱的魔法音效
+                    oscillator.type = 'sine';
+                    oscillator.frequency.setValueAtTime(500, audioContext.currentTime);
+                    oscillator.frequency.exponentialRampToValueAtTime(1500, audioContext.currentTime + 0.2);
+                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                    break;
+            }
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.2);
+        }
+
+        // 跨平台按钮音效函数
+        function addButtonSound(element, soundType) {
+            const eventType = isIOS || isAndroid ? 'touchstart' : 'click';
+            element.addEventListener(eventType, function(e) {
+                if (eventType === 'touchstart') {
+                    e.preventDefault(); // 防止移动端300ms延迟
+                }
+                playCuteSound(soundType);
+                
+                // 平台特定的按压动画
+                const duration = isIOS ? 100 : 150;
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => { this.style.transform = ''; }, duration);
+                
+                // 处理链接跳转
+                if (this.href && eventType === 'touchstart') {
+                    setTimeout(() => {
+                        if (this.href.includes('#')) {
+                            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        } else {
+                            window.location.href = this.href;
+                        }
+                    }, duration);
+                }
+            }, eventType === 'touchstart' ? { passive: false } : false);
+        }
+
+        // 为所有按钮添加跨平台音效
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('button, .btn, a[href*=".html"], a[href^="#"]');
+            buttons.forEach(button => {
+                addButtonSound(button, 'click');
+            });
+        });
+
+        // 页面加载完成后隐藏加载动画
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const loadingScreen = document.getElementById('loading-screen');
+                
+                // 播放巧克力动画完成音效
+                playCuteSound('magic');
+                setTimeout(() => playCuteSound('pop'), 200);
+                
+                loadingScreen.classList.add('hidden');
+                setTimeout(function() {
+                    loadingScreen.style.display = 'none';
+                    playCuteSound('pop'); // 动画完成音效
+                }, 500);
+            }, 500); // 0.5秒后隐藏巧克力动画
+        });
+
+        // 世界名画数据
+        const famousPaintings = [
+            {
+                title: "蒙娜丽莎",
+                artist: "列奥纳多·达·芬奇",
+                description: "文艺复兴时期的杰作，以其神秘的微笑闻名于世。",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/800px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg"
+            },
+            {
+                title: "星夜",
+                artist: "文森特·梵高",
+                description: "后印象派的经典之作，描绘了夜空中旋转的星云。",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/800px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg"
+            },
+            {
+                title: "戴珍珠耳环的少女",
+                artist: "约翰内斯·维米尔",
+                description: "荷兰黄金时代的杰作，被称为北方的蒙娜丽莎。",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/1665_Girl_with_a_Pearl_Earring.jpg/800px-1665_Girl_with_a_Pearl_Earring.jpg"
+            },
+            {
+                title: "呐喊",
+                artist: "爱德华·蒙克",
+                description: "表现主义的代表作品，表达了现代人的焦虑与恐惧。",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg/800px-Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg"
+            },
+            {
+                title: "创世纪",
+                artist: "米开朗基罗",
+                description: "西斯廷教堂天顶画的一部分，描绘了上帝创造亚当的场景。",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Michelangelo_-_Creation_of_Adam_%28cropped%29.jpg/800px-Michelangelo_-_Creation_of_Adam_%28cropped%29.jpg"
+            }
+        ];
+
+        // 为永乐映象社链接添加点击事件 - 巧克力动画过渡
+        document.addEventListener('DOMContentLoaded', function() {
+            const companyLink = document.querySelector('.company-btn');
+            if (companyLink) {
+                companyLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 播放魔法音效开始跳转
+                    playCuteSound('magic');
+                    
+                    // 重新显示巧克力动画
+                    const loadingScreen = document.getElementById('loading-screen');
+                    loadingScreen.style.display = 'flex';
+                    loadingScreen.classList.remove('hidden');
+                    
+                    // 添加可爱旋转动画
+                    loadingScreen.style.transform = 'scale(1.1) rotate(5deg)';
+                    setTimeout(() => {
+                        loadingScreen.style.transform = 'scale(1) rotate(0deg)';
+                    }, 300);
+                    
+                    // 播放弹跳音效
+                    setTimeout(() => playCuteSound('bounce'), 200);
+                    
+                    // 1秒后跳转（给用户一点时间看到可爱的巧克力）
+                    setTimeout(function() {
+                        window.location.href = companyLink.href;
+                    }, 1000);
+                });
+            }
+        });
+    </script>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">CPL</div>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#about">关于我</a></li>
+                <li><a href="#hobbies">生活爱好</a></li>
+                <li><a href="#services">服务项目</a></li>
+                <li><a href="#projects">实验室项目</a></li>
+                <li><a href="#ip-products">IP产品</a></li>
+                <li><a href="#others">其他</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 首页部分 -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="glitch" data-text="朱玮韬">朱玮韬</h1>
+                <p class="subtitle">猪鼓励IP创始人 / 艺术策展人 / 商业IP策划师</p>
+                <div class="cta-buttons">
+                    <a href="#services" class="btn primary">服务项目</a>
+                    <a href="#projects" class="btn secondary">猪鼓励IP</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <span>向下滚动</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- 关于我部分 -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">关于我</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="image-container">
+                        <img src="tupian/toxiang.jpg" alt="朱玮韬的个人照片">
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3>你好，我是<span class="highlight">朱玮韬</span></h3>
+                    <p>大家好，我是朱玮韬，豬鼓勵IP创始人、交互/跨领域策展人。毕业于华南理工大学建筑学院，目前专注于IP开发和艺术策展工作。</p>
+                    <p>作为交互/跨领域策展人，我参与和策展了扉美术馆、广州美术馆等艺术设计相关展览项目。我相信艺术不仅是美的表达，更是连接人与空间的桥梁。通过猪鼓励IP，我希望能够创造出既有艺术价值又有商业潜力的作品，让艺术真正融入人们的生活。</p>
+                    <p>在工作之余，我喜欢爬山、看电影、唱歌和阅读，这些爱好不仅丰富了我的生活，也为我的创作提供了源源不断的灵感。</p>
+                    
+                    <div class="personal-info">
+                        <div class="info-item">
+                            <span class="info-label">专业领域:</span>
+                            <span class="info-value">交互策展、跨领域艺术策划、商业IP开发</span>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="weixin://dl/chat?Victor-hheelloo" class="social-icon" title="微信"><i class="fab fa-weixin"></i></a>
+                        <a href="https://www.xiaohongshu.com/user/profile/2662848827" class="social-icon" title="小红书"><i class="fab fa-redhat"></i></a>
+                        <a href="mailto:zhuweitao370@gmail.com" class="social-icon" title="邮箱"><i class="fas fa-envelope"></i></a>
+                        <a href="tel:+861736825814" class="social-icon" title="电话"><i class="fas fa-phone"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 联系方式详情 -->
+            <div class="contact-details">
+                <h3>联系方式</h3>
+                <div class="contact-grid">
+                    <div class="contact-detail-item">
+                        <i class="fab fa-weixin"></i>
+                        <p>微信: Victor-hheelloo</p>
+                    </div>
+                    <div class="contact-detail-item">
+                        <i class="fab fa-redhat"></i>
+                        <p>小红书: 2662848827</p>
+                    </div>
+                    <div class="contact-detail-item">
+                        <i class="fas fa-phone"></i>
+                        <p>电话: +86 1736825814<br>+853 68250814</p>
+                    </div>
+                    <div class="contact-detail-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>邮箱: zhuweitao370@gmail.com</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 生活爱好部分 -->
+    <section id="hobbies" class="hobbies">
+        <div class="container">
+            <h2 class="section-title">生活爱好</h2>
+            <div class="hobbies-grid">
+                <a href="../portfolio/hiking.html" class="hobby-link-block">
+                    <div class="hobby-item">
+                        <div class="hobby-img">
+                            <img src="tupian/pashan.jpg" alt="爬山照片 - 站在山顶俯瞰风景" style="filter: contrast(110%) saturate(120%) brightness(105%);">
+                        </div>
+                        <div class="hobby-content">
+                            <h3>爬山</h3>
+                            <p>喜欢攀登高山，在自然中寻找灵感，挑战自我极限。每一次登顶都能带来全新的视角和感悟，这种体验也常常为我的策展工作带来创意。</p>
+                            <span class="hobby-link">查看最近爬的山 <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="singing.html" class="hobby-link-block">
+                    <div class="hobby-item">
+                        <div class="hobby-img">
+                            <img src="tupian/biaoyan1.jpg" alt="唱歌照片 - 麦克风前表演">
+                        </div>
+                        <div class="hobby-content">
+                            <h3>唱歌</h3>
+                            <p>音乐是我生活中不可或缺的部分，喜欢通过歌声表达情感。音乐的节奏感和韵律感也帮助我在空间设计中把握节奏与层次。</p>
+                            <span class="hobby-link">歌曲分享 <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="movies.html" class="hobby-link-block">
+                    <div class="hobby-item">
+                        <div class="hobby-img">
+                            <img src="tupian/pashan2.jpg" alt="看电影照片 - 电影院场景">
+                        </div>
+                        <div class="hobby-content">
+                            <h3>看电影</h3>
+                            <p>热爱各类电影，尤其是艺术片和科幻片。电影中的叙事方式和视觉语言对我的策展思路和空间叙事设计有很大启发。</p>
+                            <span class="hobby-link">电影推荐 <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="reading.html" class="hobby-link-block">
+                    <div class="hobby-item">
+                        <div class="hobby-img">
+                            <img src="tupian/pashan3.jpg" alt="阅读照片 - 书房阅读场景">
+                        </div>
+                        <div class="hobby-content">
+                            <h3>阅读</h3>
+                            <p>广泛阅读各类书籍，从文学作品到艺术理论，从商业管理到科幻小说。阅读帮助我拓宽视野，为创作提供源源不断的灵感。</p>
+                            <span class="hobby-link">阅读书单 <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务项目部分 -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">服务项目</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>商业IP策划</h3>
+                        <p>从概念构思到落地执行，提供全方位的商业IP策划服务。包括IP定位、故事构建、视觉形象设计以及IP运营策略，帮助品牌打造独特且具有市场竞争力的IP形象。</p>
+                        <ul class="service-features">
+                            <li>IP战略规划</li>
+                            <li>角色形象设计</li>
+                            <li>故事内容开发</li>
+                            <li>IP商业化路径</li>
+                        </ul>
+                        <a href="ip-planning.html" class="service-link">了解更多 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>商业艺术策展</h3>
+                        <p>将艺术与商业完美融合，打造具有影响力的艺术展览。从主题构思、艺术家邀请、展品选择到空间设计、宣传推广，提供全流程策展服务，为品牌创造独特的文化价值。</p>
+                        <ul class="service-features">
+                            <li>展览主题策划</li>
+                            <li>空间规划设计</li>
+                            <li>艺术家资源对接</li>
+                            <li>展览运营执行</li>
+                        </ul>
+                        <a href="curating.html" class="service-link">了解更多 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 实验室项目部分 -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">猪鼓励艺术实验室</h2>
+            <div class="projects-content">
+                <div class="project-item">
+                    <div class="project-img">
+                        <a href="coming-soon.html"><img src="tupian/cezhan.jpg" alt="猪鼓励艺术实验室项目图片" style="filter: sepia(20%) saturate(120%) hue-rotate(15deg) brightness(105%) contrast(105%);"></a>
+                    </div>
+                    <div class="project-info">
+                        <h3><a href="coming-soon.html" style="color:inherit;text-decoration:none;">猪鼓励艺术实验室</a></h3>
+                        <p>猪鼓励IP是我本人创立的原创IP，一个融合艺术、设计与商业的创新平台，致力于通过跨界合作创造独特的艺术体验和商业价值。我们相信艺术可以赋能商业，商业可以滋养艺术，两者的结合能够产生令人惊喜的化学反应。</p>
+                        
+                        <div class="project-details">
+                            <h4>现有项目</h4>
+                            <ul>
+                                <li><strong>猪鼓励IP开发</strong> - 以猪为原型的原创IP形象，融合幽默与正能量，正在进行多维度内容开发，包括角色设定、故事线构建和视觉形象完善</li>
+                                <li><strong>地下室咖啡厅的朋友们</strong> - 以地下空间为特色的主题咖啡厅概念，拥有一群独特的动物员工：
+                                    <div class="character-list">
+                                        <span class="character-badge"><i class="fas fa-rat"></i> 老鼠店长（大锅）</span>
+                                        <span class="character-badge"><i class="fas fa-bug"></i> 蚂蚁财务（百万）</span>
+                                        <span class="character-badge"><i class="fas fa-spider"></i> 蜘蛛咖啡师（朱拉花）</span>
+                                        <span class="character-badge"><i class="fas fa-worm"></i> 蜗牛送餐员（流星）</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            
+                            <div class="ip-products">
+                                <h4>IP产品</h4>
+                                <p>基于猪鼓励IP的系列衍生品正在研发中，涵盖文创产品、家居用品、数字内容等多个领域，敬请期待<span class="coming-soon">即将推出</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IP产品部分 -->
+    <section id="ip-products" class="ip-products">
+        <div class="container">
+            <h2 class="section-title">🍫 IP产品系列</h2>
+            <p class="section-subtitle">可爱治愈的猪鼓励宇宙，每一款产品都充满温暖与创意</p>
+            
+            <div class="ip-products-grid">
+                <!-- 猪鼓励主IP -->
+                <div class="ip-product-card featured">
+                    <div class="product-image">
+                        <div class="chocolate-icon">🐷</div>
+                        <div class="product-badge">即将上市</div>
+                    </div>
+                    <div class="product-content">
+                        <h3>猪鼓励主IP系列</h3>
+                        <p class="product-desc">以巧克力色小猪为主角的治愈系IP，包含毛绒玩具、钥匙扣、文具套装等可爱周边</p>
+                        <div class="product-features">
+                            <span class="feature-tag">🧸 毛绒玩具</span>
+                            <span class="feature-tag">🔑 钥匙扣</span>
+                            <span class="feature-tag">✏️ 文具套装</span>
+                            <span class="feature-tag">📱 手机配件</span>
+                        </div>
+                        <div class="product-status">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                            <span class="status-text">开发进度 75%</span>
+                        </div>
+                        <a href="../subscribe.html" class="btn chocolate-btn">预约关注</a>
+                    </div>
+                </div>
+
+                <!-- 地下室咖啡厅 -->
+                <div class="ip-product-card">
+                    <div class="product-image">
+                        <div class="chocolate-icon">🏠</div>
+                        <div class="product-badge">概念阶段</div>
+                    </div>
+                    <div class="product-content">
+                        <h3>地下室咖啡厅</h3>
+                        <p class="product-desc">独特的地下空间主题咖啡厅，由一群可爱的动物员工为您制作最温暖的巧克力饮品</p>
+                        <div class="product-features">
+                            <span class="feature-tag">🍫 主题饮品</span>
+                            <span class="feature-tag">🎭 动物员工</span>
+                            <span class="feature-tag">🎨 沉浸空间</span>
+                            <span class="feature-tag">📸 打卡圣地</span>
+                        </div>
+                        <div class="product-status">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 30%"></div>
+                            </div>
+                            <span class="status-text">概念设计 30%</span>
+                        </div>
+                        <a href="coming-soon.html" class="btn chocolate-btn">了解详情</a>
+                    </div>
+                </div>
+
+                <!-- 数字内容系列 -->
+                <div class="ip-product-card">
+                    <div class="product-image">
+                        <div class="chocolate-icon">📱</div>
+                        <div class="product-badge">筹备中</div>
+                    </div>
+                    <div class="product-content">
+                        <h3>数字内容系列</h3>
+                        <p class="product-desc">表情包、壁纸、动态贴纸等数字内容，让猪鼓励随时随地陪伴您的数字生活</p>
+                        <div class="product-features">
+                            <span class="feature-tag">😊 表情包</span>
+                            <span class="feature-tag">🖼️ 壁纸</span>
+                            <span class="feature-tag">✨ 动态贴纸</span>
+                            <span class="feature-tag">🎵 提示音</span>
+                        </div>
+                        <div class="product-status">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%"></div>
+                            </div>
+                            <span class="status-text">内容制作 60%</span>
+                        </div>
+                        <a href="coming-soon.html" class="btn chocolate-btn">抢先体验</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 其他板块 -->
+    <section id="others" class="others">
+        <div class="container">
+            <h2 class="section-title">其他</h2>
+            <div class="others-content">
+                <div class="company-team">
+                    <div class="team-photo">
+                        <img src="tupian/hezhao.png" alt="广州永乐映象社传媒科技有限公司团队合照">
+                    </div>
+                    <div class="team-info">
+                        <h3>广州永乐映象社传媒科技有限公司</h3>
+                        <p class="company-subtitle">（永乐映象社）</p>
+                        <p class="founder-intro">创始人：<strong>朱玮韬</strong></p>
+                        <p class="company-desc">专注科技赋能文旅创新的专业团队，由澳门青年领军，联合内地高校精英，打造"产-学-研-用"一体化团队。基于大湾区市场需求，深度融合大数据分析与AI生成技术，跨领域联合粤港澳青年和企业合作，推动文化IP的数字化创新与快速孵化。</p>
+                        <div class="company-links">
+                            <a href="company.html" class="btn company-btn">访问永乐映象社官网 <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="other-projects">
+                    <div class="project-card">
+                        <div class="project-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>澳门青年聚贤协进会</h4>
+                        <p class="status-badge">在开发中</p>
+                        <p class="project-desc">澳门青年聚贤协进会的官方平台，致力于促进澳门青年在大湾区的发展与合作。</p>
+                        <a href="coming-soon.html" class="btn secondary">敬请期待</a>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h4>更多项目</h4>
+                        <p class="status-badge">敬请期待</p>
+                        <p class="project-desc">更多精彩项目正在筹备中，敬请期待...</p>
+                        <a href="coming-soon.html" class="btn secondary">敬请期待</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚部分 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Chopiglat</h2>
+                    <p>猪鼓励IP官方平台</p>
+                </div>
+                <div class="footer-social">
+                    <a href="weixin://dl/chat?Victor-hheelloo" class="social-icon" title="微信"><i class="fab fa-weixin"></i></a>
+                    <a href="https://www.xiaohongshu.com/user/profile/2662848827" class="social-icon" title="小红书"><i class="fab fa-redhat"></i></a>
+                    <a href="mailto:zhuweitao370@gmail.com" class="social-icon" title="邮箱"><i class="fas fa-envelope"></i></a>
+                    <a href="tel:+861736825814" class="social-icon" title="电话"><i class="fas fa-phone"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Chopiglat. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- 其他板块CSS样式 -->
+    <style>
+        /* 其他板块样式 */
+        .others {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .others::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+
+        .others .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .others .section-title {
+            color: white;
+            margin-bottom: 60px;
+            font-size: 3rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .others .section-title::after {
+            background: white;
+        }
+
+        .company-team {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 60px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .team-photo img:hover {
+            transform: scale(1.05);
+        }
+
+        .team-info h3 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .company-subtitle {
+            font-size: 1.5rem;
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .founder-intro {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .founder-intro strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .company-desc {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .company-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .company-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .other-projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .project-card h4 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .project-desc {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .btn.secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn.secondary:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .company-team {
+                grid-template-columns: 1fr;
+                padding: 40px 20px;
+                gap: 30px;
+            }
+            
+            .team-info h3 {
+                font-size: 2rem;
+            }
+            
+            .others .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .other-projects {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .company-team {
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .project-card {
+            animation: fadeInUp 0.8s ease;
+            animation-delay: 0.2s;
+        }
+
+        .project-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 链接动画 */
+        a {
+            transition: all 0.3s ease;
+        }
+
+        .company-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .btn.secondary:hover {
+            transform: translateY(-2px) scale(1.05);
+        }
+    </style>
+
+
+
+    <!-- 可爱音效系统 -->
+    <script>
+        // 简化的可爱音效系统
+
+    </script>
+</body>
+</html>
+    

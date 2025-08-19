@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>预约关注系统测试</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .test-item {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>预约关注系统测试</h1>
+        
+        <div class="test-item">
+            <h3>测试1: 预约关注按钮链接</h3>
+            <p>点击下面的按钮测试预约功能</p>
+            <a href="subscribe.html" class="btn">预约关注</a>
+        </div>
+        
+        <div class="test-item">
+            <h3>测试2: 直接访问预约页面</h3>
+            <p>直接访问预约页面：<a href="subscribe.html" style="color: white;">subscribe.html</a></p>
+        </div>
+        
+        <div class="test-item">
+            <h3>测试3: 表单验证测试</h3>
+            <p>预约页面包含完整的表单验证和提交功能</p>
+        </div>
+    </div>
+</body>
+</html>

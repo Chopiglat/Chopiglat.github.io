@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>预约关注 - 猪鼓励艺术实验室</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        .subscribe-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            padding: 50px;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .subscribe-icon {
+            font-size: 4rem;
+            color: #667eea;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .subscribe-title {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .subscribe-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .subscribe-form {
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background: white;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-weight: normal;
+            color: #555;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #56ab2f, #a8e6cf);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #764ba2;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-errors {
+            background: rgba(255, 77, 77, 0.1);
+            border: 1px solid rgba(255, 77, 77, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            color: #ff4d4d;
+        }
+
+        .form-errors ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .form-errors li {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 480px) {
+            .subscribe-container {
+                margin: 10px;
+                padding: 30px 20px;
+            }
+
+            .subscribe-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="subscribe-container">
+        <div class="subscribe-icon">
+            <i class="fas fa-bell"></i>
+        </div>
+        
+        <h1 class="subscribe-title">预约关注</h1>
+        <p class="subscribe-subtitle">
+            订阅获取猪鼓励艺术实验室最新动态、项目更新和独家内容！
+        </p>
+
+        <form class="subscribe-form" id="subscribeForm" action="subscribe.php" method="POST">
+            <div class="form-group">
+                <label for="name">姓名 <span class="required">*</span></label>
+                <input type="text" id="name" name="name" placeholder="请输入您的姓名" required>
+                <div class="error-message" id="nameError">请输入您的姓名</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">邮箱 <span class="required">*</span></label>
+                <input type="email" id="email" name="email" placeholder="请输入您的邮箱地址" required>
+                <div class="error-message" id="emailError">请输入有效的邮箱地址</div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">电话（可选）</label>
+                <input type="tel" id="phone" name="phone" placeholder="请输入您的电话号码">
+            </div>
+
+            <div class="form-group">
+                <label for="interest">感兴趣的内容</label>
+                <select id="interest" name="interest">
+                    <option value="">请选择感兴趣的内容</option>
+                    <option value="ip-development">猪鼓励IP开发</option>
+                    <option value="art-curation">艺术策展</option>
+                    <option value="coffee-projects">地下室咖啡厅项目</option>
+                    <option value="all">全部内容</option>
+                </select>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="newsletter" name="newsletter" checked>
+                <label for="newsletter">接收项目更新邮件</label>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i>
+                立即预约关注
+            </button>
+        </form>
+
+        <div class="success-message" id="successMessage">
+            <i class="fas fa-check-circle"></i>
+            <strong>预约成功！</strong><br>
+            感谢您的关注，我们将通过邮件向您发送最新动态。
+        </div>
+
+        <a href="../index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            返回首页
+        </a>
+    </div>
+
+    <script>
+        // 表单验证函数
+        function validateForm() {
+            const form = document.getElementById('subscribeForm');
+            const name = form.name.value.trim();
+            const email = form.email.value.trim();
+            const phone = form.phone.value.trim();
+            let errors = [];
+            
+            if (!name) errors.push('姓名不能为空');
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push('请输入有效的邮箱地址');
+            
+            if (errors.length > 0) {
+                // 显示字段级错误
+                if (!name) document.getElementById('nameError').style.display = 'block';
+                if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) document.getElementById('emailError').style.display = 'block';
+                return false;
+            } else {
+                document.getElementById('nameError').style.display = 'none';
+                document.getElementById('emailError').style.display = 'none';
+                return true;
+            }
+        }
+
+        // 表单提交处理
+        document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) return;
+            
+            // 显示加载状态
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 提交中...';
+            submitBtn.disabled = true;
+            
+            // 收集表单数据
+            const formData = new FormData(this);
+            
+            // 模拟提交到服务器
+            setTimeout(() => {
+                document.getElementById('subscribeForm').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // 重置按钮状态
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                
+                // 这里可以添加实际的表单提交逻辑
+                console.log('预约信息:', Object.fromEntries(formData));
+            }, 2000);
+        });
+        
+        function resetForm() {
+            document.getElementById('subscribeForm').reset();
+            document.getElementById('subscribeForm').style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('nameError').style.display = 'none';
+            document.getElementById('emailError').style.display = 'none';
+        }
+
+        // 实时验证
+        document.getElementById('name').addEventListener('blur', validateForm);
+        document.getElementById('email').addEventListener('blur', validateForm);
+
+        // 输入框焦点效果
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

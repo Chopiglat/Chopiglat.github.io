@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>朱玮韬 - 歌曲分享</title>
+    <link rel="stylesheet" href="https://firstcard.cc/A/A43/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 通用样式 */
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+        }
+        
+        .nav-menu a {
+            color: #34495e;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: #3498db;
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+        
+        /* 页面标题样式 */
+        .page-header {
+            padding: 60px 0;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('tupian/biaoyan1.jpg') center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .page-description {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* 歌曲分享样式 */
+        .songs-section {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 60px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            border-radius: 2px;
+        }
+        
+        .songs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .song-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .song-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .song-cover {
+            position: relative;
+            height: 200px;
+        }
+        
+        .song-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .play-button {
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+            background-color: #2980b9;
+        }
+        
+        .song-info {
+            padding: 30px 20px 20px;
+        }
+        
+        .song-category {
+            display: inline-block;
+            background-color: #f1f5f9;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        
+        .song-info h3 {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .song-artist {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .song-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* 表演经历样式 */
+        .performance-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .performance-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .performance-timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: #f1f5f9;
+            transform: translateX(-50%);
+        }
+        
+        .performance-item {
+            margin-bottom: 40px;
+            position: relative;
+            width: 50%;
+        }
+        
+        .performance-item:nth-child(odd) {
+            left: 0;
+            padding-right: 40px;
+        }
+        
+        .performance-item:nth-child(even) {
+            left: 50%;
+            padding-left: 40px;
+        }
+        
+        .performance-item:after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #3498db;
+            border: 4px solid #f1f5f9;
+            z-index: 1;
+        }
+        
+        .performance-item:nth-child(odd):after {
+            right: -10px;
+        }
+        
+        .performance-item:nth-child(even):after {
+            left: -10px;
+        }
+        
+        .performance-content {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .performance-date {
+            color: #3498db;
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .performance-content h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .performance-content p {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        /* 音乐感悟样式 */
+        .music-thoughts {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .thoughts-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .thoughts-quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            position: relative;
+            padding: 0 40px;
+        }
+        
+        .thoughts-quote:before,
+        .thoughts-quote:after {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(52, 152, 219, 0.2);
+            position: absolute;
+        }
+        
+        .thoughts-quote:before {
+            top: -20px;
+            left: 0;
+        }
+        
+        .thoughts-quote:after {
+            bottom: -60px;
+            right: 0;
+        }
+        
+        .thoughts-text {
+            color: #555;
+            line-height: 1.8;
+            text-align: left;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .footer-logo p {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .footer-social {
+            display: flex;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            color: white;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            background-color: #3498db;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            text-decoration: none;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                transition: 0.3s;
+                padding: 20px 0;
+                margin: 0;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 20px;
+            }
+            
+            .performance-timeline:before {
+                left: 30px;
+            }
+            
+            .performance-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 70px !important;
+                padding-right: 0 !important;
+            }
+            
+            .performance-item:after {
+                left: 20px !important;
+            }
+            
+            .thoughts-quote {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">CPL</a>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html#home">首页</a></li>
+                        <li><a href="../index.html#about">关于我</a></li>
+                        <li><a href="../index.html#hobbies">生活爱好</a></li>
+                        <li><a href="../index.html#services">服务项目</a></li>
+                        <li><a href="../index.html#projects">实验室项目</a></li>
+                        <li><a href="../index.html#ip-products">IP产品</a></li>
+                        <li><a href="../index.html#others">其他</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="page-title">我的歌曲分享</h1>
+            <p class="page-description">每一首歌都有它的故事，每一段旋律都承载着不同的情感</p>
+        </div>
+    </header>
+
+    <!-- 歌曲分享部分 -->
+    <section class="songs-section">
+        <div class="container">
+            <h2 class="section-title">推荐歌曲</h2>
+            <div class="songs-grid">
+                <!-- 歌曲1 -->
+                <div class="song-card">
+                    <div class="song-cover">
+                        <img src="https://picsum.photos/id/1082/600/400" alt="歌曲《这世界那么多人》封面">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="song-info">
+                        <span class="song-category">流行</span>
+                        <h3>这世界那么多人</h3>
+                        <div class="song-artist">莫文蔚</div>
+                        <p class="song-description">温柔的旋律和细腻的歌词，让人感受到生活中的温暖与美好。在安静的夜晚听这首歌，总能让人平静下来，想起那些擦肩而过的人与事。</p>
+                    </div>
+                </div>
+                
+                <!-- 歌曲2 -->
+                <div class="song-card">
+                    <div class="song-cover">
+                        <img src="https://picsum.photos/id/1083/600/400" alt="歌曲《追梦赤子心》封面">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="song-info">
+                        <span class="song-category">摇滚</span>
+                        <h3>追梦赤子心</h3>
+                        <div class="song-artist">GALA乐队</div>
+                        <p class="song-description">充满力量的一首歌，每次街演都会唱这首，总能点燃现场气氛。"向前跑，迎着冷眼和嘲笑"，歌词直击人心，特别适合在迷茫时给自己打气。</p>
+                    </div>
+                </div>
+                
+                <!-- 歌曲3 -->
+                <div class="song-card">
+                    <div class="song-cover">
+                        <img src="https://picsum.photos/id/1084/600/400" alt="歌曲《成都》封面">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="song-info">
+                        <span class="song-category">民谣</span>
+                        <h3>成都</h3>
+                        <div class="song-artist">赵雷</div>
+                        <p class="song-description">乐队排练时常弹唱的曲目，简单的旋律和朴实的歌词勾勒出城市中的温暖回忆。这首歌在街演时特别受欢迎，总能引起大合唱。</p>
+                    </div>
+                </div>
+                
+                <!-- 歌曲4 -->
+                <div class="song-card">
+                    <div class="song-cover">
+                        <img src="https://picsum.photos/id/1085/600/400" alt="歌曲《月光奏鸣曲》封面">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="song-info">
+                        <span class="song-category">古典</span>
+                        <h3>月光奏鸣曲</h3>
+                        <div class="song-artist">贝多芬</div>
+                        <p class="song-description">演出前放松心情的必听曲目，钢琴的旋律如同月光般清澈，能让人快速平静下来。在创作原创歌曲时，也常从中寻找灵感。</p>
+                    </div>
+                </div>
+                
+                <!-- 歌曲5 -->
+                <div class="song-card">
+                    <div class="song-cover">
+                        <img src="https://picsum.photos/id/1086/600/400" alt="歌曲《Fly Me to the Moon》封面">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="song-info">
+                        <span class="song-category">爵士</span>
+                        <h3>Fly Me to the Moon</h3>
+                        <div class="song-artist">Frank Sinatra</div>
+                        <p class="song-description">乐队改编过的爵士经典，轻松愉快的旋律特别适合在小型演出场合表演。这首歌总能带给我好心情和创作灵感。</p>
+                    </div>
+                </div>
+                
+                <!-- 歌曲6 -->
+                <div class="song-card">
+                    <div class="song-cover">
+                        <img src="https://picsum.photos/id/1087/600/400" alt="歌曲《海阔天空》封面">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="song-info">
+                        <span class="song-category">摇滚</span>
+                        <h3>海阔天空</h3>
+                        <div class="song-artist">Beyond</div>
+                        <p class="song-description">澳门演出时演唱的曲目，引发了全场大合唱。这首歌承载了太多人的青春回忆，每次演唱都能感受到音乐连接人心的力量。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 表演经历部分 -->
+    <section class="performance-section">
+        <div class="container">
+            <h2 class="section-title">我的表演经历</h2>
+            <div class="performance-timeline">
+                <!-- 经历1 -->
+                <div class="performance-item">
+                    <div class="performance-content">
+                        <span class="performance-date">2022-2024年</span>
+                        <h3>华南理工大学校园街演</h3>
+                        <p>每周五、六、日在华南理工大学校内大石头处组织busking（街头表演）活动，积累了丰富的现场演出经验。通过这些活动建立了300人规模的音乐爱好者交流群，定期分享音乐和组织线下活动。</p>
+                    </div>
+                </div>
+                
+                <!-- 经历2 -->
+                <div class="performance-item">
+                    <div class="performance-content">
+                        <span class="performance-date">2024-2025年</span>
+                        <h3>BASEMENT乐队主唱</h3>
+                        <p>担任BASEMENT乐队主唱，负责乐队的歌曲编排、演唱和部分原创歌曲创作。风格涵盖流行、摇滚、民谣等多种类型，在校内外参与多场演出，深受观众喜爱。</p>
+                    </div>
+                </div>
+                
+                <!-- 经历3 -->
+                <div class="performance-item">
+                    <div class="performance-content">
+                        <span class="performance-date">2021-2025年</span>
+                        <h3>多次公开表演</h3>
+                        <p>参与各类公开演出活动，包括校园晚会、社区文化节及商业演出等。最近一次表演是在澳门青年节目中，演唱原创歌曲获得广泛好评，进一步坚定了音乐创作的道路。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 音乐感悟部分 -->
+    <section class="music-thoughts">
+        <div class="container">
+            <h2 class="section-title">音乐带给我的感悟</h2>
+            <div class="thoughts-container">
+                <div class="thoughts-quote">
+                    音乐是灵魂的语言，它能表达那些无法用文字描述的情感
+                </div>
+                <div class="thoughts-text">
+                    <p>对我而言，音乐不仅仅是爱好，更是一种生活方式。从组织街头表演到担任乐队主唱，每一次站在舞台上，都是与观众进行心灵交流的过程。</p>
+                    <p>300人的音乐交流群让我明白，音乐能跨越年龄和背景，将志同道合的人聚集在一起。在澳门的演出经历尤其珍贵，让我看到音乐如何成为文化交流的桥梁。</p>
+                    <p>作为主唱，我学会了如何通过歌声传递情感，如何与乐队成员默契配合，创造出打动人心的表演。这些经历教会我的不仅是音乐技巧，更是团队协作和表达自我的能力。</p>
+                    <p>分享这些歌曲，也是分享我人生中不同阶段的故事和感悟。希望它们也能触动你的心灵，带来力量和温暖。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚部分 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Chopiglat</h2>
+                    <p>猪鼓励IP官方平台</p>
+                </div>
+                <div class="footer-social">
+                    <a href="weixin://dl/chat?Victor-hheelloo" class="social-icon" title="微信"><i class="fab fa-weixin"></i></a>
+                    <a href="https://www.xiaohongshu.com/user/profile/2662848827" class="social-icon" title="小红书"><i class="fab fa-redhat"></i></a>
+                    <a href="mailto:zhuweitao370@gmail.com" class="social-icon" title="邮箱"><i class="fas fa-envelope"></i></a>
+                    <a href="tel:+861736825814" class="social-icon" title="电话"><i class="fas fa-phone"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Chopiglat. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <script>
+        // 导航菜单切换
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // 返回顶部按钮
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 播放按钮动画
+        const playButtons = document.querySelectorAll('.play-button');
+        playButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                this.querySelector('i').classList.toggle('fa-play');
+                this.querySelector('i').classList.toggle('fa-pause');
+            });
+        });
+    </script>
+</body>
+</html>
