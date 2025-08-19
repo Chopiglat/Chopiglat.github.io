@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下水道咖啡厅 - 井盖下的魔法世界</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: #ecf0f1;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="500" cy="500" r="300" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/><circle cx="500" cy="500" r="200" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></svg>');
+            background-size: cover;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #f39c12;
+            text-shadow: 0 0 20px rgba(243, 156, 18, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #bdc3c7;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .sewer-lid {
+            font-size: 4rem;
+            margin: 20px 0;
+            animation: bounce 2s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .characters {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: #f39c12;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: #f39c12;
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .character-card {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(243, 156, 18, 0.2);
+        }
+
+        .character-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .character-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .character-name {
+            font-size: 1.8rem;
+            color: #f39c12;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .character-title {
+            font-size: 1.2rem;
+            color: #bdc3c7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .character-desc {
+            color: #ecf0f1;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .character-traits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .trait-tag {
+            background: rgba(243, 156, 18, 0.2);
+            color: #f39c12;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(243, 156, 18, 0.3);
+        }
+
+        .story-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #2c3e50, #1a1a1a);
+        }
+
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .story-text {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: #bdc3c7;
+            margin-bottom: 40px;
+        }
+
+        .cta-section {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            text-align: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 20px 40px;
+            background: #2c3e50;
+            color: #f39c12;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            background: #34495e;
+        }
+
+        footer {
+            background: #1a1a1a;
+            padding: 40px 0;
+            text-align: center;
+            color: #7f8c8d;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(243, 156, 18, 0.8);
+            color: #2c3e50;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: rgba(243, 156, 18, 1);
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .character-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .character-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← 返回主页</a>
+
+    <header>
+        <div class="container">
+            <div class="sewer-lid">🕳️</div>
+            <h1>下水道咖啡厅</h1>
+            <p class="subtitle">井盖下的魔法世界</p>
+            <p class="subtitle">一个由地下生物经营的神秘咖啡厅</p>
+        </div>
+    </header>
+
+    <section class="characters">
+        <div class="container">
+            <h2 class="section-title">我们的员工</h2>
+            
+            <div class="character-grid">
+                <!-- 老鼠店长 -->
+                <div class="character-card">
+                    <div class="character-icon">🐭</div>
+                    <h3 class="character-name">大锅</h3>
+                    <p class="character-title">老鼠店长 / 创始人</p>
+                    <p class="character-desc">
+                        勤奋又有点小聪明的老鼠店长，热爱咖啡和美食，一心扑在咖啡事业上。虽然管理能力有待加强，但总是用卖萌来化解危机。关心每一位伙伴，是大家的精神支柱。
+                    </p>
+                    <div class="character-traits">
+                        <span class="trait-tag">勤奋</span>
+                        <span class="trait-tag">小聪明</span>
+                        <span class="trait-tag">卖萌高手</span>
+                        <span class="trait-tag">咖啡狂热</span>
+                    </div>
+                </div>
+
+                <!-- 蚂蚁财务 -->
+                <div class="character-card">
+                    <div class="character-icon">🐜</div>
+                    <h3 class="character-name">百万</h3>
+                    <p class="character-title">蚂蚁财务 / 收银员</p>
+                    <p class="character-desc">
+                        精打细算的守财奴，经常为了预算和大锅大打出手。但总在危机时刻淡定地找到解决方法，是咖啡厅的经济支柱。对数字极其敏感，一分钱都逃不过她的眼睛。
+                    </p>
+                    <div class="character-traits">
+                        <span class="trait-tag">精打细算</span>
+                        <span class="trait-tag">守财奴</span>
+                        <span class="trait-tag">危机处理</span>
+                        <span class="trait-tag">数字天才</span>
+                    </div>
+                </div>
+
+                <!-- 蜘蛛咖啡师 -->
+                <div class="character-card">
+                    <div class="character-icon">🕷️</div>
+                    <h3 class="character-name">朱拉花 / Alex朱艾力</h3>
+                    <p class="character-title">蜘蛛咖啡师 / 拉花艺术家</p>
+                    <p class="character-desc">
+                        六只手的艺术性格蜘蛛，对咖啡拉花艺术追求极高。嘴上常常嫌弃同伴，其实容易被细节打动。Tempo邓波是他的节奏搭档，两人合作无间，创造出令人惊叹的咖啡艺术。
+                    </p>
+                    <div class="character-traits">
+                        <span class="trait-tag">完美主义</span>
+                        <span class="trait-tag">艺术天赋</span>
+                        <span class="trait-tag">嘴硬心软</span>
+                        <span class="trait-tag">六手协调</span>
+                    </div>
+                </div>
+
+                <!-- 蜗牛送餐员 -->
+                <div class="character-card">
+                    <div class="character-icon">🐌</div>
+                    <h3 class="character-name">流星 / 旋风</h3>
+                    <p class="character-title">蜗牛送餐员 / 外卖专员</p>
+                    <p class="character-desc">
+                        对生活充满戾气但努力干活的打工蜗牛。虽然送得慢，但是送得稳。朱拉花很喜欢他，因为他总是能在咖啡变凉前准确送达。虽然慢，但从不洒出一滴咖啡。
+                    </p>
+                    <div class="character-traits">
+                        <span class="trait-tag">稳重可靠</span>
+                        <span class="trait-tag">慢工出细活</span>
+                        <span class="trait-tag">外冷内热</span>
+                        <span class="trait-tag">零洒漏记录</span>
+                    </div>
+                </div>
+
+                <!-- 萤火虫甜点师 -->
+                <div class="character-card">
+                    <div class="character-icon">✨</div>
+                    <h3 class="character-name">小吉</h3>
+                    <p class="character-title">萤火虫甜点师 / 照明师</p>
+                    <p class="character-desc">
+                        圆溜溜小翅膀的勤劳师傅，因为跟小蜜蜂采过蜜后爱上了甜点。偶尔在咖啡厅停电时被拿来当灯泡。制作的甜点总是闪闪发光，是咖啡厅的甜蜜担当。
+                    </p>
+                    <div class="character-traits">
+                        <span class="trait-tag">甜点天才</span>
+                        <span class="trait-tag">发光体质</span>
+                        <span class="trait-tag">勤劳善良</span>
+                        <span class="trait-tag">蜜蜂学徒</span>
+                    </div>
+                </div>
+
+                <!-- 青蛙甜点师 -->
+                <div class="character-card">
+                    <div class="character-icon">🐸</div>
+                    <h3 class="character-name">奔奔</h3>
+                    <p class="character-title">青蛙甜点师 / 料理大师</p>
+                    <p class="character-desc">
+                        沉稳温柔，情绪稳定的奔奔师傅。因为不吃昆虫只爱吃烹饪后的人类食物被赶出青蛙家族。心灰意冷时遇到大锅，于是成为了一名甜品师傅，用甜点传递温暖。
+                    </p>
+                    <div class="character-traits">
+                        <span class="trait-tag">沉稳温柔</span>
+                        <span class="trait-tag">情绪稳定</span>
+                        <span class="trait-tag">反传统</span>
+                        <span class="trait-tag">料理大师</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="story-section">
+        <div class="container">
+            <h2 class="section-title">我们的故事</h2>
+            <div class="story-content">
+                <p class="story-text">
+                    在城市的某个角落，有一个不起眼的井盖。很少有人知道，井盖下面隐藏着一个神奇的咖啡厅——下水道咖啡厅。
+                    <br><br>
+                    这里聚集了一群被人类世界遗忘的可爱生物：勤奋的老鼠店长大锅，精打细算的蚂蚁财务百万，追求完美的蜘蛛咖啡师朱拉花，稳重可靠的蜗牛送餐员流星，发光发亮的萤火虫甜点师小吉，以及温柔沉稳的青蛙甜点师奔奔。
+                    <br><br>
+                    他们用魔法般的技艺，将最普通的食材变成令人难忘的美味。每一杯咖啡都蕴含着他们的梦想，每一份甜点都传递着他们的温暖。
+                    <br><br>
+                    欢迎来到下水道咖啡厅，在这里，每一次品尝都是一次魔法冒险。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>想认识我们的员工吗？</h2>
+            <p>下水道咖啡厅正在建设中，敬请期待我们的正式开业！</p>
+            <a href="index.html" class="cta-button">返回主页</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 下水道咖啡厅. 井盖下的魔法世界.</p>
+        </div>
+    </footer>
+</body>
+</html>

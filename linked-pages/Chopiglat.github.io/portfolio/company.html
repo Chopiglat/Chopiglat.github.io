@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>永乐映象社 - 科技赋能文旅创新</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* 主要内容 */
+        .main-content {
+            margin-top: 80px;
+            padding: 60px 0;
+        }
+
+        .section {
+            margin-bottom: 80px;
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: #555;
+            text-align: center;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .content-grid {
+            display: grid;
+            gap: 30px;
+        }
+
+        .content-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .content-card h3 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-card p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list i {
+            color: #667eea;
+            width: 20px;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+            padding: 60px;
+            border-radius: 20px;
+            margin-top: 60px;
+        }
+
+        .contact-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .contact-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .section {
+                padding: 40px 20px;
+                margin: 40px 20px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">永乐映象社</a>
+            <ul class="nav-links">
+                <li><a href="#company">公司介绍</a></li>
+                <li><a href="#position">团队定位</a></li>
+                <li><a href="#business">业务内容</a></li>
+                <li><a href="#model">商业模式</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+            <a href="../index.html" class="back-btn">创始人个人网站</a>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="main-content">
+        <div class="container">
+            <!-- 公司介绍 -->
+            <section id="company" class="section">
+                <h1 class="section-title">广州永乐映象社传媒科技有限公司</h1>
+                <p class="section-subtitle">专注科技赋能文旅创新的专业团队</p>
+                
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3><i class="fas fa-users"></i> 研发团队构成</h3>
+                        <p>由<span class="highlight">澳门青年领军</span>，联合内地高校精英，打造"产-学-研-用"一体化团队。团队成员来自澳门、广州、深圳等地，涵盖艺术设计、技术研发、商业策划等多个专业领域。</p>
+                    </div>
+
+                    <div class="content-card">
+                        <h3><i class="fas fa-cogs"></i> 核心技术优势</h3>
+                        <p>基于<span class="highlight">大湾区市场需求</span>，深度融合大数据分析与AI生成技术，跨领域联合粤港澳青年和企业合作，推动文化IP的数字化创新与快速孵化。</p>
+                    </div>
+
+                    <div class="content-card">
+                        <h3><i class="fas fa-trophy"></i> 项目经验</h3>
+                        <p>主导多项AI艺术交互、智慧文旅项目落地，在文化IP数字化、沉浸式体验设计、智慧景区建设等领域拥有丰富实战经验。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 团队定位 -->
+            <section id="position" class="section">
+                <h2 class="section-title">团队定位</h2>
+                <p class="section-subtitle">让每个空间都能讲出动人的艺术故事</p>
+                
+                <div class="content-card">
+                    <h3><i class="fas fa-heart"></i> 我们的使命</h3>
+                    <p>无论是城市更新的文化赋能、品牌年轻化的艺术跨界，还是文旅项目的体验升级，我们始终以<span class="highlight">艺术审美为内核</span>、以<span class="highlight">数据洞察为工具</span>，为客户创造可感知的商业价值与文化影响力。</p>
+                    
+                    <p>我们相信，每个空间都有其独特的故事和灵魂，我们的使命就是通过科技与艺术的力量，让这些故事被更多人听见、看见、感受到。</p>
+                </div>
+            </section>
+
+            <!-- 业务内容 -->
+            <section id="business" class="section">
+                <h2 class="section-title">业务内容</h2>
+                <p class="section-subtitle">科技赋能文旅创新的全链路解决方案</p>
+                
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3><i class="fas fa-brain"></i> 智慧文旅解决方案</h3>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-robot"></i> AI景区导览系统</li>
+                            <li><i class="fas fa-magic"></i> 数字IP开发与运营</li>
+                            <li><i class="fas fa-vr-cardboard"></i> 沉浸式体验设计</li>
+                            <li><i class="fas fa-chart-line"></i> 智慧景区数据分析</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3><i class="fas fa-seedling"></i> 乡村振兴项目策划</h3>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-map-marked-alt"></i> 韶关马头镇旅游升级</li>
+                            <li><i class="fas fa-mountain"></i> 始兴隘子镇文化挖掘</li>
+                            <li><i class="fas fa-home"></i> 乡村旅游产品设计</li>
+                            <li><i class="fas fa-handshake"></i> 政企合作模式创新</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3><i class="fas fa-palette"></i> 商业策展与空间设计</h3>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-museum"></i> 寻己十六人格气味博物馆</li>
+                            <li><i class="fas fa-store"></i> 品牌空间体验设计</li>
+                            <li><i class="fas fa-lightbulb"></i> 沉浸式展览策划</li>
+                            <li><i class="fas fa-users"></i> 文化艺术IP合作</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-card">
+                        <h3><i class="fas fa-campground"></i> 户外旅游开发</h3>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-tent"></i> 景区露营地规划</li>
+                            <li><i class="fas fa-hiking"></i> 徒步越野路线设计</li>
+                            <li><i class="fas fa-compass"></i> 户外体验产品设计</li>
+                            <li><i class="fas fa-shield-alt"></i> 安全管理方案</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3><i class="fas fa-star"></i> 代表项目</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-award"></i> <strong>寻己十六人格气味博物馆</strong> - 沉浸式策展项目，结合心理学与气味艺术</li>
+                        <li><i class="fas fa-map"></i> <strong>始兴县隘子镇旅游升级策划</strong> - 乡村振兴与文旅融合示范项目</li>
+                        <li><i class="fas fa-mountain"></i> <strong>龙斗峰露营地及徒步路线规划</strong> - 户外探险与生态旅游结合</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 商业模式 -->
+            <section id="model" class="section">
+                <h2 class="section-title">商业模式</h2>
+                <p class="section-subtitle">构建"艺术赋能+智能辅助+文化变现"的多元化盈利模式</p>
+                
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3><i class="fas fa-1"></i> 政府与企业服务</h3>
+                        <p>为政府文旅部门和企业提供<span class="highlight">AI文旅解决方案</span>及<span class="highlight">IP授权服务</span>，包括智慧景区建设、文化IP开发、数字内容制作等。</p>
+                    </div>
+
+                    <div class="content-card">
+                        <h3><i class="fas fa-2"></i> 消费者体验</h3>
+                        <p>面向消费者提供<span class="highlight">沉浸式体验</span>和<span class="highlight">文创产品销售</span>，包括主题展览门票、IP衍生品、数字内容订阅等。</p>
+                    </div>
+
+                    <div class="content-card">
+                        <h3><i class="fas fa-3"></i> 品牌合作</h3>
+                        <p>通过<span class="highlight">品牌联合营销</span>，与知名品牌进行跨界合作，共同开发联名产品、主题活动等，实现品牌价值最大化。</p>
+                    </div>
+
+                    <div class="content-card">
+                        <h3><i class="fas fa-4"></i> 乡村振兴</h3>
+                        <p>采用<span class="highlight">轻资产运营模式</span>，享受大湾区政策红利，通过乡村振兴项目合作，形成可持续的商业闭环。</p>
+                    </div>
+
+                    <div class="content-card">
+                        <h3><i class="fas fa-5"></i> 艺术增值</h3>
+                        <p>运用<span class="highlight">美学数据驱动</span>的高溢价变现模式，通过艺术IP的数字化运营，实现文化价值的商业转化。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 联系我们 -->
+            <section id="contact" class="contact-section">
+                <h2>联系我们</h2>
+                <p>期待与您合作，共同创造更多艺术价值</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h4><i class="fas fa-user-tie"></i> 创始人</h4>
+                        <p>朱玮韬</p>
+                        <p>豬鼓勵团队负责人</p>
+                        <p>永乐映象社创始人</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <h4><i class="fas fa-envelope"></i> 邮箱</h4>
+                        <p><a href="mailto:zhuweitao370@gmail.com">zhuweitao370@gmail.com</a></p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <h4><i class="fas fa-phone"></i> 电话</h4>
+                        <p><a href="tel:+861736825814">+86 173 6825 814</a></p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <h4><i class="fab fa-weixin"></i> 微信</h4>
+                        <p>Victor-hheelloo</p>
+                    </div>
+                </div>
+                
+                <a href="../index.html" class="cta-button">
+                    <i class="fas fa-home"></i>
+                    创始人个人网站
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+
+    <!-- 页面动画增强 -->
+    <style>
+        /* 页面加载动画 */
+        .section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .section.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 内容卡片悬停效果 */
+        .content-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .content-card:hover::before {
+            left: 100%;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        /* 按钮动画 */
+        .cta-button, .back-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .cta-button::before, .back-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before, .back-btn:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover, .back-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        /* 导航栏动画 */
+        .navbar {
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links a {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #667eea;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* 联系信息动画 */
+        .contact-item {
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* 背景装饰动画 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            animation: backgroundMove 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes backgroundMove {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.1);
+            }
+        }
+    </style>
+
+    <script>
+        // 页面滚动动画
+        function animateOnScroll() {
+            const sections = document.querySelectorAll('.section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const sectionVisible = 150;
+                
+                if (sectionTop < window.innerHeight - sectionVisible) {
+                    section.classList.add('animate');
+                }
+            });
+        }
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 初始化动画
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+            }
+        });
+    </script>
+</body>
+</html>

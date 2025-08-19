@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商业艺术策展 - 朱玮韬</title>
+    <link rel="stylesheet" href="https://firstcard.cc/A/A43/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 通用样式 */
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+        }
+        
+        .nav-menu a {
+            color: #34495e;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: #3498db;
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+        
+        /* 页面标题样式 */
+        .page-header {
+            padding: 60px 0;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://picsum.photos/id/1074/1920/600') center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .page-description {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* 展览详情样式 */
+        .exhibition-section {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .exhibition-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+        
+        .exhibition-image {
+            flex: 1 1 500px;
+        }
+        
+        .exhibition-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .exhibition-details {
+            flex: 1 1 500px;
+            padding: 50px;
+        }
+        
+        .exhibition-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .exhibition-title:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            border-radius: 2px;
+        }
+        
+        .exhibition-meta {
+            margin-bottom: 30px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .meta-item {
+            margin-bottom: 15px;
+            display: flex;
+        }
+        
+        .meta-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .meta-label {
+            flex: 0 0 120px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .meta-value {
+            flex: 1;
+            color: #666;
+        }
+        
+        .exhibition-description {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        .exhibition-description p {
+            margin-bottom: 15px;
+        }
+        
+        .exhibition-description p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 60px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            border-radius: 2px;
+        }
+        
+        /* 展览亮点部分 */
+        .highlights-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .highlight-item {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .highlight-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+        
+        .highlight-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .highlight-icon i {
+            font-size: 1.8rem;
+            color: #3498db;
+        }
+        
+        .highlight-item h3 {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .highlight-item p {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .footer-logo p {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .footer-social {
+            display: flex;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            color: white;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            background-color: #3498db;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            text-decoration: none;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                transition: 0.3s;
+                padding: 20px 0;
+                margin: 0;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 20px;
+            }
+            
+            .exhibition-details {
+                padding: 30px 20px;
+            }
+            
+            .exhibition-title {
+                font-size: 1.7rem;
+            }
+            
+            .page-title, .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">CPL</a>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html#home">首页</a></li>
+                        <li><a href="../index.html#about">关于我</a></li>
+                        <li><a href="../index.html#hobbies">生活爱好</a></li>
+                        <li><a href="../index.html#services">服务项目</a></li>
+                        <li><a href="../index.html#projects">实验室项目</a></li>
+                        <li><a href="../index.html#ip-products">IP产品</a></li>
+                        <li><a href="../index.html#others">其他</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="page-title">商业艺术策展</h1>
+            <p class="page-description">融合艺术与商业，创造独特的文化体验与品牌价值</p>
+        </div>
+    </header>
+
+    <!-- 展览详情部分 -->
+    <section class="exhibition-section">
+        <div class="container">
+            <div class="exhibition-container">
+                <div class="exhibition-image">
+                    <img src="../tupian/cezhan.jpg" alt="尋己x十六人格氣味博物館展览现场" style="filter: sepia(10%) saturate(110%) hue-rotate(25deg) brightness(102%) contrast(102%);">
+                </div>
+                <div class="exhibition-details">
+                    <h2 class="exhibition-title">尋己x十六人格氣味博物館</h2>
+                    
+                    <div class="exhibition-meta">
+                        <div class="meta-item">
+                            <div class="meta-label">策展人</div>
+                            <div class="meta-value">朱瑋韜</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">IP策劃</div>
+                            <div class="meta-value">AD尋香團隊（十六人格香水）</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">品牌方</div>
+                            <div class="meta-value">KASE x AD尋香</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">場地提供方</div>
+                            <div class="meta-value">御桂SPACE藝術空間</div>
+                        </div>
+                    </div>
+                    
+                    <div class="exhibition-description">
+                        <p>「尋己x十六人格氣味博物館」是一場獨具匠心的沉浸式感官體驗展，將心理學與嗅覺藝術巧妙結合，為參觀者帶來一場探索自我、認識自我的獨特旅程。</p>
+                        <p>展覽以榮格心理學中的十六種人格類型為理論基礎，結合AD尋香團隊精心研發的十六款人格香水，打造了十六個獨具特色的氣味空間。每個空間都通過燈光、音樂、裝置藝術與獨特香氛的協同作用，營造出與特定人格類型相呼應的感官體驗。</p>
+                        <p>作為策展人，我負責整體展覽的空間規劃、體驗流程設計與視覺風格統籌，旨在打破傳統香水展覽的陳舊模式，創建一個既能展示產品特性，又能引導參觀者進行自我探索的互動式體驗空間。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 展览亮点部分 -->
+    <section class="highlights-section">
+        <div class="container">
+            <h2 class="section-title">展览亮点</h2>
+            <div class="highlights-grid">
+                <div class="highlight-item">
+                    <div class="highlight-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>人格探索體驗</h3>
+                    <p>參觀者首先通過互動測試確定自己的人格類型，隨後獲取相應的「氣味地圖」，引導他們探索最符合自己個性的香氛空間，創造個人化參觀體驗。</p>
+                </div>
+                
+                <div class="highlight-item">
+                    <div class="highlight-icon">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h3>獨特香氛創作</h3>
+                    <p>AD尋香團隊為每種人格類型量身打造獨特香氛，從前調、中調到後調都與相應人格特質緊密相連，使抽象的人格特質轉化為可感知的嗅覺體驗。</p>
+                </div>
+                
+                <div class="highlight-item">
+                    <div class="highlight-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>多感官互動裝置</h3>
+                    <p>每個展區都配備與人格特質和香氛特性相呼應的多媒體裝置，參觀者可以通過視覺、聽覺和觸覺等多種感官，全方位體驗不同人格的獨特魅力。</p>
+                </div>
+                
+                <div class="highlight-item">
+                    <div class="highlight-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>打卡分享空間</h3>
+                    <p>特別設計的視覺打卡點，將人格特質視覺化，不僅增強了參觀者的參與感，也促進了社交媒體上的自發傳播，為品牌帶來了顯著的曝光提升。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚部分 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Chopiglat</h2>
+                    <p>猪鼓励IP官方平台</p>
+                </div>
+                <div class="footer-social">
+                    <a href="weixin://dl/chat?Victor-hheelloo" class="social-icon" title="微信"><i class="fab fa-weixin"></i></a>
+                    <a href="https://www.xiaohongshu.com/user/profile/2662848827" class="social-icon" title="小红书"><i class="fab fa-redhat"></i></a>
+                    <a href="mailto:zhuweitao370@gmail.com" class="social-icon" title="邮箱"><i class="fas fa-envelope"></i></a>
+                    <a href="tel:+861736825814" class="social-icon" title="电话"><i class="fas fa-phone"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Chopiglat. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <script>
+        // 导航菜单切换
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // 返回顶部按钮
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+    

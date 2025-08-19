@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李四 - 平面设计师</title>
+    <link rel="stylesheet" href="https://firstcard.cc/A/A43/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 导航栏 - 添加了指向电影推荐页面的链接 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">LS</div>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#about">关于我</a></li>
+                <li><a href="#education">教育背景</a></li>
+                <li><a href="#skills">专业技能</a></li>
+                <li><a href="#portfolio">作品集</a></li>
+                <li><a href="#experience">工作经历</a></li>
+                <li><a href="#awards">获奖情况</a></li>
+                <li><a href="#blog">设计心得</a></li>
+                <li><a href="#contact">联系我</a></li>
+                <li><a href="movie-recommendations.html">电影推荐</a></li> <!-- 新增链接 -->
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 首页部分 -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="glitch" data-text="李四">李四</h1>
+                <p class="subtitle">平面设计师 / 品牌设计师 / 插画师</p>
+                <div class="cta-buttons">
+                    <a href="#portfolio" class="btn primary">浏览作品</a>
+                    <a href="#contact" class="btn secondary">合作咨询</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <span>向下滚动</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- 关于我部分 -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">关于我</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="image-container">
+                        <img src="src/profile.jpg" alt="李四的照片">
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3>你好，我是<span class="highlight">李四</span></h3>
+                    <p>拥有5年专业平面设计经验，专注于品牌视觉识别系统设计与插画创作。我相信好的设计能够传递情感、讲述故事，并为品牌创造独特价值。</p>
+                    <p>我的设计风格融合了现代简约与人文情感，擅长将复杂概念转化为直观且富有吸引力的视觉语言。曾为20+品牌提供设计服务，涵盖餐饮、教育、科技等多个领域。</p>
+                    <div class="personal-info">
+                        <div class="info-item">
+                            <span class="info-label">姓名:</span>
+                            <span class="info-value">李四</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">年龄:</span>
+                            <span class="info-value">27岁</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">专业:</span>
+                            <span class="info-value">视觉传达设计</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">邮箱:</span>
+                            <span class="info-value">lisi@designstudio.com</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-weibo"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-weixin"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-behance"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 教育背景部分 -->
+    <section id="education" class="education">
+        <div class="container">
+            <h2 class="section-title">教育背景</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>建筑学 学士学位</h3>
+                        <h4>华南理工大学建筑学院</h4>
+                        <p class="timeline-date">2014 - 2018</p>
+                        <p>主修课程：建筑设计、空间设计、建筑理论、策展空间设计等。专注于建筑与艺术的跨领域研究，为后续交互策展工作奠定空间设计基础。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 专业技能部分 -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">专业技能</h2>
+            <div class="skills-content">
+                <div class="skills-category">
+                    <h3>策展工具</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>策展空间设计</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>展览策划软件</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>多媒体展示技术</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>交互装置设计</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skills-category">
+                    <h3>辅助技能</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>HTML/CSS</span>
+                                <span>65%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>3D基础</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>视频剪辑</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skills-category">
+                    <h3>策展能力</h3>
+                    <div class="skill-circles">
+                        <div class="skill-circle">
+                            <div class="circle-progress" data-percent="95">
+                                <span class="circle-text">95%</span>
+                            </div>
+                            <h4>交互策展</h4>
+                        </div>
+                        <div class="skill-circle">
+                            <div class="circle-progress" data-percent="90">
+                                <span class="circle-text">90%</span>
+                            </div>
+                            <h4>空间策划</h4>
+                        </div>
+                        <div class="skill-circle">
+                            <div class="circle-progress" data-percent="88">
+                                <span class="circle-text">88%</span>
+                            </div>
+                            <h4>IP开发</h4>
+                        </div>
+                        <div class="skill-circle">
+                            <div class="circle-progress" data-percent="85">
+                                <span class="circle-text">85%</span>
+                            </div>
+                            <h4>跨领域整合</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品集部分 -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">作品集</h2>
+            <div class="portfolio-filter">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="brand">品牌设计</button>
+                <button class="filter-btn" data-filter="illustration">插画作品</button>
+                <button class="filter-btn" data-filter="packaging">包装设计</button>
+                <button class="filter-btn" data-filter="editorial">版式设计</button>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-category="brand">
+                    <div class="portfolio-img">
+                        <img src="src/works/brand1.jpg" alt="咖啡品牌设计">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>星辰咖啡品牌视觉设计</h3>
+                        <p>品牌标识 / VI系统</p>
+                        <a href="#" class="portfolio-link"><i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="illustration">
+                    <div class="portfolio-img">
+                        <img src="src/works/illust1.jpg" alt="儿童绘本插画">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>《森林奇遇记》绘本插画</h3>
+                        <p>儿童插画 / 绘本创作</p>
+                        <a href="#" class="portfolio-link"><i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="packaging">
+                    <div class="portfolio-img">
+                        <img src="src/works/package1.jpg" alt="茶叶包装设计">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>青山茶语包装系列设计</h3>
+                        <p>包装设计 / 品牌延伸</p>
+                        <a href="#" class="portfolio-link"><i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="editorial">
+                    <div class="portfolio-img">
+                        <img src="src/works/editorial1.jpg" alt="杂志版式设计">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>《设计思潮》杂志版式设计</h3>
+                        <p>版式设计 / 书籍装帧</p>
+                        <a href="#" class="portfolio-link"><i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="brand">
+                    <div class="portfolio-img">
+                        <img src="src/works/brand2.jpg" alt="教育品牌设计">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>启智教育品牌重塑</h3>
+                        <p>品牌策略 / 视觉设计</p>
+                        <a href="#" class="portfolio-link"><i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="illustration">
+                    <div class="portfolio-img">
+                        <img src="src/works/illust2.jpg" alt="商业插画">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>城市生活系列插画</h3>
+                        <p>商业插画 / 系列创作</p>
+                        <a href="#" class="portfolio-link"><i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 工作经历部分 -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">工作经历</h2>
+            <div class="experience-grid">
+                <div class="experience-item">
+                    <div class="experience-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="experience-content">
+                        <h3>资深平面设计师</h3>
+                        <h4>创意图景设计公司</h4>
+                        <p class="experience-date">2021年至今</p>
+                        <ul class="experience-details">
+                            <li>负责企业品牌视觉识别系统设计与升级</li>
+                            <li>主导多个重要客户的包装与宣传物料设计</li>
+                            <li>指导初级设计师完成项目，把控设计质量</li>
+                            <li>参与客户沟通，理解需求并提供专业设计方案</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-icon">
+                        <i class="fas fa-brush"></i>
+                    </div>
+                    <div class="experience-content">
+                        <h3>平面设计实习生</h3>
+                        <h4>未来视觉工作室</h4>
+                        <p class="experience-date">2020年7月 - 2021年2月</p>
+                        <ul class="experience-details">
+                            <li>协助完成品牌设计项目的视觉元素创作</li>
+                            <li>参与宣传册、海报等物料的设计与制作</li>
+                            <li>整理设计素材，建立公司设计资源库</li>
+                            <li>学习品牌设计流程与客户对接技巧</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-icon">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <div class="experience-content">
+                        <h3>自由插画师</h3>
+                        <h4>独立工作</h4>
+                        <p class="experience-date">2018年 - 2020年</p>
+                        <ul class="experience-details">
+                            <li>为多家出版社创作书籍插画</li>
+                            <li>与品牌合作开发限定插画系列产品</li>
+                            <li>举办个人插画作品展2次</li>
+                            <li>出版《城市角落》个人插画集</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 获奖情况部分 -->
+    <section id="awards" class="awards">
+        <div class="container">
+            <h2 class="section-title">获奖情况</h2>
+            <div class="awards-grid">
+                <div class="award-item">
+                    <div class="award-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="award-content">
+                        <h3>全国品牌设计大赛</h3>
+                        <p class="award-info">专业组 金奖</p>
+                        <p class="award-date">2022年</p>
+                    </div>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="award-content">
+                        <h3>亚洲插画大赛</h3>
+                        <p class="award-info">最佳新锐奖</p>
+                        <p class="award-date">2021年</p>
+                    </div>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="award-content">
+                        <h3>中国包装设计大展</h3>
+                        <p class="award-info">优秀奖</p>
+                        <p class="award-date">2020年</p>
+                    </div>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="award-content">
+                        <h3>学院毕业设计展</h3>
+                        <p class="award-info">年度最佳创意奖</p>
+                        <p class="award-date">2018年</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 设计心得部分 -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <h2 class="section-title">设计心得</h2>
+            <div class="blog-grid">
+                <div class="blog-item">
+                    <div class="blog-img">
+                        <img src="src/blog/brand.jpg" alt="品牌设计思考">
+                        <div class="blog-date">
+                            <span class="day">05</span>
+                            <span class="month">四月</span>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="#">品牌设计中的情感连接</a></h3>
+                        <p>探讨如何通过视觉元素建立品牌与消费者之间的情感共鸣，创造持久的品牌价值...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-folder"></i> 品牌设计</span>
+                            <span><i class="fas fa-comments"></i> 32条评论</span>
+                        </div>
+                        <a href="#" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-item">
+                    <div class="blog-img">
+                        <img src="src/blog/illustration.jpg" alt="插画创作">
+                        <div class="blog-date">
+                            <span class="day">22</span>
+                            <span class="month">三月</span>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="#">数字插画的风格塑造与突破</a></h3>
+                        <p>分享个人插画风格形成的过程，以及如何在保持个人特色的同时不断创新...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-folder"></i> 插画技巧</span>
+                            <span><i class="fas fa-comments"></i> 45条评论</span>
+                        </div>
+                        <a href="#" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-item">
+                    <div class="blog-img">
+                        <img src="src/blog/color.jpg" alt="色彩搭配">
+                        <div class="blog-date">
+                            <span class="day">10</span>
+                            <span class="month">三月</span>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="#">品牌设计中的色彩心理学应用</a></h3>
+                        <p>解析不同色彩在品牌设计中的情感传达，以及如何科学地进行品牌色彩规划...</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-folder"></i> 设计理论</span>
+                            <span><i class="fas fa-comments"></i> 28条评论</span>
+                        </div>
+                        <a href="#" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我部分 -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">联系我</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>工作室地址</h3>
+                            <p>上海市静安区南京西路1788号</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>电话</h3>
+                            <p>+86 139 8765 4321</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>邮箱</h3>
+                            <p>lisi@designstudio.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>网站</h3>
+                            <p>www.lisidesign.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="您的姓名" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="您的邮箱" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" placeholder="合作主题" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="请描述您的需求" required></textarea>
+                        </div>
+                        <button type="submit" class="btn primary">发送需求</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚部分 - 添加了指向电影推荐页面的链接 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>李四</h2>
+                    <p>平面设计师 / 插画师</p>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-weibo"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-behance"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 李四设计工作室. 保留所有权利.</p>
+                <small>所有内容均由用户提供，本网站不对信息的准确性、完整性、适用性作任何保证，请阅读并知悉<a href="terms.html">《网站服务条款与声明》</a></small>
+                <p><a href="movie-recommendations.html" style="color: rgba(255,255,255,0.7);">查看电影推荐</a></p> <!-- 新增链接 -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- JavaScript文件 -->
+    <script src="js/main.js"></script>
+</body>
+</html>

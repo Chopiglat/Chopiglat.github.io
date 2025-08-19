@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>朱玮韬 - 阅读书单</title>
+    <link rel="stylesheet" href="https://firstcard.cc/A/A43/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 通用样式 */
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+        }
+        
+        .nav-menu a {
+            color: #34495e;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: #3498db;
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+        
+        /* 页面标题样式 */
+        .page-header {
+            padding: 60px 0;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('tupian/pashan2.jpg') center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .page-description {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* 书籍推荐样式 */
+        .books-section {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 60px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            border-radius: 2px;
+        }
+        
+        .book-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            background-color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .filter-btn.active {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .filter-btn:hover:not(.active) {
+            background-color: #f1f5f9;
+        }
+        
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .book-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .book-cover {
+            height: 320px;
+            position: relative;
+            overflow: hidden;
+            background-color: #f1f5f9;
+        }
+        
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .book-card:hover .book-cover img {
+            transform: scale(1.05);
+        }
+        
+        .book-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .book-info {
+            padding: 25px;
+        }
+        
+        .book-info h3 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+        
+        .book-author {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .book-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .book-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .book-insights {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .book-insights h4 {
+            font-size: 1rem;
+            color: #34495e;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .book-insights h4 i {
+            margin-right: 8px;
+            color: #3498db;
+        }
+        
+        .book-insights p {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        /* 阅读感悟样式 */
+        .reading-thoughts {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .thoughts-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .thoughts-item {
+            margin-bottom: 50px;
+            padding-bottom: 50px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .thoughts-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .thoughts-quote {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: #2c3e50;
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #3498db;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .thoughts-quote:after {
+            content: '';
+            position: absolute;
+            left: 20px;
+            bottom: -10px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid #3498db;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+        
+        .thoughts-content {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .thoughts-content p {
+            margin-bottom: 15px;
+        }
+        
+        /* 阅读习惯样式 */
+        .reading-habits {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .habits-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .habit-item {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .habit-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .habit-icon i {
+            font-size: 1.8rem;
+            color: #3498db;
+        }
+        
+        .habit-item h3 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .habit-item p {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .footer-logo p {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .footer-social {
+            display: flex;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: #3498db;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                transition: 0.3s;
+                padding: 20px 0;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 20px;
+            }
+            
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .thoughts-quote {
+                font-size: 1.2rem;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">CPL</a>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html#home">首页</a></li>
+                        <li><a href="../index.html#about">关于我</a></li>
+                        <li><a href="../index.html#hobbies">生活爱好</a></li>
+                        <li><a href="../index.html#services">服务项目</a></li>
+                        <li><a href="../index.html#projects">实验室项目</a></li>
+                        <li><a href="../index.html#ip-products">IP产品</a></li>
+                        <li><a href="../index.html#others">其他</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="page-title">我的阅读书单</h1>
+            <p class="page-description">阅读是拓展认知边界的最佳方式，每本书都是一扇通往新世界的大门</p>
+        </div>
+    </header>
+
+    <!-- 书籍推荐部分 -->
+    <section class="books-section">
+        <div class="container">
+            <h2 class="section-title">推荐书籍</h2>
+            
+            <div class="book-filters">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="art">艺术</button>
+                <button class="filter-btn" data-filter="design">设计</button>
+                <button class="filter-btn" data-filter="business">商业</button>
+                <button class="filter-btn" data-filter="fiction">文学</button>
+            </div>
+            
+            <div class="books-grid">
+                <!-- 书籍1 -->
+                <div class="book-card" data-category="art">
+                    <div class="book-cover">
+                        <img src="https://picsum.photos/id/24/600/800" alt="《艺术的故事》书籍封面">
+                        <span class="book-category">艺术</span>
+                    </div>
+                    <div class="book-info">
+                        <h3>艺术的故事</h3>
+                        <div class="book-author">贡布里希</div>
+                        <div class="book-meta">
+                            <span><i class="fas fa-book"></i> 688页</span>
+                            <span><i class="fas fa-star"></i> 9.6分</span>
+                        </div>
+                        <p class="book-description">一部艺术史经典著作，从史前艺术到现代艺术，梳理了人类艺术发展的脉络，被誉为"艺术史中的圣经"。</p>
+                        <div class="book-insights">
+                            <h4><i class="fas fa-lightbulb"></i> 我的见解</h4>
+                            <p>这本书让我理解了艺术发展的连续性和变革性，帮助我在策展时更好地把握艺术作品之间的关联和对话。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 书籍2 -->
+                <div class="book-card" data-category="design">
+                    <div class="book-cover">
+                        <img src="https://picsum.photos/id/20/600/800" alt="《设计中的设计》书籍封面">
+                        <span class="book-category">设计</span>
+                    </div>
+                    <div class="book-info">
+                        <h3>设计中的设计</h3>
+                        <div class="book-author">原研哉</div>
+                        <div class="book-meta">
+                            <span><i class="fas fa-book"></i> 320页</span>
+                            <span><i class="fas fa-star"></i> 9.2分</span>
+                        </div>
+                        <p class="book-description">日本著名设计师原研哉的设计理念合集，探讨了设计的本质和未来方向，强调设计应回归日常生活。</p>
+                        <div class="book-insights">
+                            <h4><i class="fas fa-lightbulb"></i> 我的见解</h4>
+                            <p>原研哉对"空"的概念阐述，启发我在展览空间设计中重视留白的艺术，给观众留下思考和感受的空间。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 书籍3 -->
+                <div class="book-card" data-category="business">
+                    <div class="book-cover">
+                        <img src="https://picsum.photos/id/21/600/800" alt="《品牌形象的秘密》书籍封面">
+                        <span class="book-category">商业</span>
+                    </div>
+                    <div class="book-info">
+                        <h3>品牌形象的秘密</h3>
+                        <div class="book-author">西蒙·马吉尔</div>
+                        <div class="book-meta">
+                            <span><i class="fas fa-book"></i> 288页</span>
+                            <span><i class="fas fa-star"></i> 8.8分</span>
+                        </div>
+                        <p class="book-description">解析成功品牌形象背后的设计策略和心理学原理，探讨如何通过视觉设计传递品牌价值。</p>
+                        <div

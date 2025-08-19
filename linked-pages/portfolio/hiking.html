@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>朱玮韬 - 爬山记录</title>
+    <link rel="stylesheet" href="https://firstcard.cc/A/A43/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 通用样式 */
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+        }
+        
+        .nav-menu a {
+            color: #34495e;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: #3498db;
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+        
+        /* 页面标题样式 */
+        .page-header {
+            padding: 60px 0;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('tupian/pashan.jpg') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            filter: contrast(110%) saturate(120%);
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .page-description {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* 爬山记录样式 */
+        .hiking-records {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 60px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            border-radius: 2px;
+        }
+        
+        .hiking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .hiking-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .hiking-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .hiking-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .hiking-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .hiking-item:hover .hiking-img img {
+            transform: scale(1.05);
+        }
+        
+        .hiking-info {
+            padding: 30px;
+        }
+        
+        .hiking-date {
+            display: inline-block;
+            background-color: #f1f5f9;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        
+        .hiking-info h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .hiking-details {
+            display: flex;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .hiking-detail-item {
+            display: flex;
+            align-items: center;
+            margin-right: 25px;
+            color: #666;
+        }
+        
+        .hiking-detail-item i {
+            margin-right: 8px;
+            color: #3498db;
+        }
+        
+        .hiking-info p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .hiking-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .hiking-gallery img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        
+        .hiking-gallery img:hover {
+            opacity: 0.8;
+        }
+        
+        /* 爬山感悟样式 */
+        .hiking-thoughts {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .thoughts-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #f8f9fa;
+            padding: 40px;
+            border-radius: 12px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .thoughts-container h3 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+        }
+        
+        .thought-item {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .thought-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .thought-item h4 {
+            font-size: 1.3rem;
+            color: #34495e;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .thought-item h4 i {
+            margin-right: 10px;
+            color: #3498db;
+        }
+        
+        .thought-item p {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .footer-logo p {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .footer-social {
+            display: flex;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: #3498db;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                transition: 0.3s;
+                padding: 20px 0;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 20px;
+            }
+            
+            .hiking-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .thoughts-container {
+                padding: 30px 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">CPL</a>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html#home">首页</a></li>
+                        <li><a href="../index.html#about">关于我</a></li>
+                        <li><a href="../index.html#hobbies">生活爱好</a></li>
+                        <li><a href="../index.html#services">服务项目</a></li>
+                        <li><a href="../index.html#projects">实验室项目</a></li>
+                        <li><a href="../index.html#ip-products">IP产品</a></li>
+                        <li><a href="../index.html#others">其他</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="page-title">我的爬山记录</h1>
+            <p class="page-description">每一次攀登都是对自我的挑战，每一次登顶都能带来全新的视角和感悟</p>
+        </div>
+    </header>
+
+    <!-- 爬山记录部分 -->
+    <section class="hiking-records">
+        <div class="container">
+            <h2 class="section-title">近期爬山记录</h2>
+            <div class="hiking-grid">
+                <!-- 爬山记录1 -->
+                <div class="hiking-item">
+                    <div class="hiking-img">
+                        <img src="tupian/pashan.jpg" alt="白云山日出景色" style="filter: contrast(110%) saturate(120%) brightness(105%);">
+                    </div>
+                    <div class="hiking-info">
+                        <span class="hiking-date">2023年10月15日</span>
+                        <h3>白云山一日行</h3>
+                        <div class="hiking-details">
+                            <div class="hiking-detail-item">
+                                <i class="fas fa-mountain"></i>
+                                <span>海拔382米</span>
+                            </div>
+                            <div class="hiking-detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>4小时行程</span>
+                            </div>
+                            <div class="hiking-detail-item">
+                                <i class="fas fa-route"></i>
+                                <span>8公里</span>
+                            </div>
+                        </div>
+                        <p>清晨6点从山脚出发，沿着蜿蜒的山路缓缓而上。白云山的清新空气让人心旷神怡，沿途的绿植和鸟鸣为这段旅程增添了无限生机。站在山顶俯瞰广州城，整个城市在晨雾中若隐若现，宛如仙境。</p>
+                        <p>这次爬山让我感受到，有时候最美的风景不一定在远方，身边的城市绿洲同样能带给人惊喜和感动。</p>
+                        <div class="hiking-gallery">
+                            <img src="tupian/pashan2.jpg" alt="白云山风景1" style="filter: contrast(110%) saturate(120%) brightness(105%);">
+                            <img src="tupian/pashan3.jpg" alt="白云山风景2" style="filter: contrast(110%) saturate(120%) brightness(105%);">
+                            <img src="tupian/pashan4.jpg" alt="白云山风景3" style="filter: contrast(110%) saturate(120%) brightness(105%);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 爬山感悟部分 -->
+    <section class="hiking-thoughts">
+        <div class="container">
+            <h2 class="section-title">爬山带来的感悟</h2>
+            <div class="thoughts-container">
+                <h3>登山与人生</h3>
+                
+                <div class="thought-item">
+                    <h4><i class="fas fa-lightbulb"></i> 关于坚持</h4>
+                    <p>爬山的过程中，总会有想放弃的时刻。双腿酸痛，呼吸急促，眼前的路似乎永远走不完。但每次咬牙坚持，最终登顶时的喜悦都告诉我：坚持的意义在于突破自我设限。人生也是如此，很多时候我们不是不能，而是认为自己不能。</p>
+                </div>
+                
+                <div class="thought-item">
+                    <h4><i class="fas fa-lightbulb"></i> 关于视角</h4>
+                    <p>山脚、山腰、山顶，不同高度看到的风景截然不同。站得越高，视野越开阔，之前看似巨大的障碍也变得渺小。这提醒我，在面对生活中的困难时，不妨试着提升自己的视角，从更宏观的角度看待问题，往往能找到新的解决方案。</p>
+                </div>
+                
+                <div class="thought-item">
+                    <h4><i class="fas fa-lightbulb"></i> 关于节奏</h4>
+                    <p>每个人爬山的节奏不同，有人快，有人慢。重要的不是速度，而是找到适合自己的节奏，保持稳定前进。生活和工作也是如此，不必盲目与他人比较，按照自己的节奏和步调前进，反而能走得更远更稳。</p>
+                </div>
+                
+                <div class="thought-item">
+                    <h4><i class="fas fa-lightbulb"></i> 关于自然</h4>
+                    <p>在山林中，我感受到自然的伟大与自身的渺小。这种感受让我保持谦逊，也让我获得平静。大自然的美和力量是无穷的，它能治愈疲惫，激发灵感。每当我在工作中遇到瓶颈，回到自然中总能找到答案。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚部分 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Chopiglat</h2>
+                    <p>猪鼓励IP官方平台</p>
+                </div>
+                <div class="footer-social">
+                    <a href="weixin://dl/chat?Victor-hheelloo" class="social-icon" title="微信"><i class="fab fa-weixin"></i></a>
+                    <a href="https://www.xiaohongshu.com/user/profile/2662848827" class="social-icon" title="小红书"><i class="fab fa-redhat"></i></a>
+                    <a href="mailto:zhuweitao370@gmail.com" class="social-icon" title="邮箱"><i class="fas fa-envelope"></i></a>
+                    <a href="tel:+861736825814" class="social-icon" title="电话"><i class="fas fa-phone"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Chopiglat. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <script>
+        // 导航菜单切换
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // 返回顶部按钮
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+    

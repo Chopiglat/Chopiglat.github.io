@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>朱玮韬 - 电影推荐</title>
+    <link rel="stylesheet" href="https://firstcard.cc/A/A43/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 通用样式 */
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+        }
+        
+        .nav-menu a {
+            color: #34495e;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: #3498db;
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+        
+        /* 页面标题样式 */
+        .page-header {
+            padding: 60px 0;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('tupian/pashan.jpg') center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .page-description {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* 电影推荐样式 */
+        .movies-section {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 60px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            border-radius: 2px;
+        }
+        
+        .movie-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            background-color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .filter-btn.active {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .filter-btn:hover:not(.active) {
+            background-color: #f1f5f9;
+        }
+        
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .movie-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .movie-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .movie-poster {
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .movie-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .movie-card:hover .movie-poster img {
+            transform: scale(1.05);
+        }
+        
+        .movie-rating {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .movie-rating i {
+            color: #f1c40f;
+            margin-right: 5px;
+        }
+        
+        .movie-info {
+            padding: 25px;
+        }
+        
+        .movie-category {
+            display: inline-block;
+            background-color: #f1f5f9;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        
+        .movie-info h3 {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .movie-year {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .movie-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .movie-insights {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .movie-insights h4 {
+            font-size: 1rem;
+            color: #34495e;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .movie-insights h4 i {
+            margin-right: 8px;
+            color: #3498db;
+        }
+        
+        .movie-insights p {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        /* 电影感悟样式 */
+        .movie-thoughts {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .thoughts-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .thoughts-item {
+            margin-bottom: 50px;
+            padding-bottom: 50px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .thoughts-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .thoughts-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .thoughts-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 20px;
+        }
+        
+        .thoughts-title {
+            flex: 1;
+        }
+        
+        .thoughts-title h3 {
+            font-size: 1.6rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .thoughts-title p {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+        
+        .thoughts-content {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .thoughts-content p {
+            margin-bottom: 15px;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .footer-logo p {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .footer-social {
+            display: flex;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: #3498db;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                transition: 0.3s;
+                padding: 20px 0;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 20px;
+            }
+            
+            .movies-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .thoughts-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .thoughts-icon {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">CPL</a>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html#home">首页</a></li>
+                        <li><a href="../index.html#about">关于我</a></li>
+                        <li><a href="../index.html#hobbies">生活爱好</a></li>
+                        <li><a href="../index.html#services">服务项目</a></li>
+                        <li><a href="../index.html#projects">实验室项目</a></li>
+                        <li><a href="../index.html#ip-products">IP产品</a></li>
+                        <li><a href="../index.html#others">其他</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="page-title">我的电影推荐</h1>
+            <p class="page-description">电影是另一种形式的叙事艺术，能够拓展我们对世界的认知和想象</p>
+        </div>
+    </header>
+
+    <!-- 电影推荐部分 -->
+    <section class="movies-section">
+        <div class="container">
+            <h2 class="section-title">推荐电影</h2>
+            
+            <div class="movie-filters">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="art">艺术片</button>
+                <button class="filter-btn" data-filter="sci-fi">科幻片</button>
+                <button class="filter-btn" data-filter="drama">剧情片</button>
+                <button class="filter-btn" data-filter="documentary">纪录片</button>
+            </div>
+            
+            <div class="movies-grid">
+                <!-- 电影1 -->
+                <div class="movie-card" data-category="art">
+                    <div class="movie-poster">
+                        <img src="https://picsum.photos/id/1068/600/900" alt="电影《艺术家》海报">
+                        <div class="movie-rating">
+                            <i class="fas fa-star"></i> 8.4
+                        </div>
+                    </div>
+                    <div class="movie-info">
+                        <span class="movie-category">艺术片</span>
+                        <h3>艺术家</h3>
+                        <div class="movie-year">2011</div>
+                        <p class="movie-description">一部黑白默片，讲述了默片时代的明星在有声电影时代的挣扎与转变。影片本身就是对电影艺术的致敬。</p>
+                        <div class="movie-insights">
+                            <h4><i class="fas fa-lightbulb"></i> 我的见解</h4>
+                            <p>这部电影让我思考艺术形式的变迁与坚守。在策展工作中，如何在传统与创新之间找到平衡，这部电影给了我很多启发。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 电影2 -->
+                <div class="movie-card" data-category="sci-fi">
+                    <div class="movie-poster">
+                        <img src="https://picsum.photos/id/1069/600/900" alt="电影《银翼杀手2049》海报">
+                        <div class="movie-rating">
+                            <i class="fas fa-star"></i> 8.3
+                        </div>
+                    </div>
+                    <div class="movie-info">
+                        <span class="movie-category">科幻片</span>
+                        <h3>银翼杀手2049</h3>
+                        <div class="movie-year">2017</div>
+                        <p class="movie-description">一部视觉风格独特的科幻电影，探讨了人性、记忆与身份认同的深刻主题。</p>
+                        <div class="movie-insights">
+                            <h4><i class="fas fa-lightbulb"></i> 我的见解</h4>
+                            <p>影片的视觉美学和空间设计令人惊叹，对我策划具有未来感的展览有很大启发，尤其是光影运用和色彩搭配。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 电影3 -->
+                <div class="movie-card" data-category="drama">
+                    <div class="movie-poster">
+                        <img src="https://picsum.photos/id/1070/600/900" alt="电影《寄生虫》海报">
+                        <div class="movie-rating">
+                            <i class="fas fa-star"></i> 8.8
+                        </div>
+                    </div>
+                    <div class="movie-info">
+                        <span class="movie-category">剧情片</span>
+                        <h3>寄生虫</h3>
+                        <div class="movie-year">2019</div>
+                        <p class="movie-description">讲述了一个贫困家庭逐渐渗透进富裕家庭工作的故事，深刻反映了社会阶层差异。</p>
+                        <div class="movie-insights">
+                            <h4><i class="fas fa-lightbulb"></i> 我的见解</h4>
+                            <p>电影中空间的象征意义非常强烈，不同阶层的居住环境设计对比鲜明，这种通过空间叙事表达主题的方式值得学习。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 电影4 -->
+                <div class="movie-card" data-category="documentary">
+                    <div class="movie-poster">
+                        <img src="https://picsum.photos/id/1071/600/900" alt="电影《脸庞，村庄》海报">
+                        <div class="movie-rating">
+                            <i class="fas fa-star"></i> 8.1
+                        </div>
+                    </div>
+                    <div class="movie-info">
+                        <span class="movie-category">纪录片</span>
+                        <h3>脸庞，村庄</h3>
+                        <div class="movie-year">2017</div>
+                        <p class="movie-description">一位新浪潮电影导演和一位街头艺术家合作，在法国乡村进行的艺术项目记录。</p>
+                        <div class="movie-insights">
+                            <h4><i class="fas fa-lightbulb"></i> 我的见解</h4>
+                            <p>这部纪录片展示了艺术如何融入日常生活，如何与普通人产生连接，这对我策划公共艺术展览有很大启发。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 电影5 -->
+                <div class="movie-card" data-category="art">
+                    <div class="movie-poster">
+                        <img src="https://picsum.photos/id/1072/600/900" alt="电影《布达佩斯大饭店》海报">
+                        <div class="movie-rating">
+                            <i class="fas fa-star"></i> 8.9
+                        </div>
+                    </div>
+                    <div class="movie-info">
+                        <span class="movie-category">艺术片</span>
+                        <h3>布达佩斯大饭店</h3>
+                        <div class="movie-year">2014</div>
+                        <p class="movie-description">讲述了布达佩斯大饭店礼宾员古斯塔夫先生和他的门生零的冒险故事，视觉风格极为独特。</p>
+                        <div class="movie-insights">
+                            <h4><i class="fas fa-lightbulb"></i> 我的见解</h4>
+                            <p>韦斯·安德森的对称构图和色彩美学令人着迷，这种极致的视觉风格对我设计展览空间布局有很大启发。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 电影6 -->
+                <div class="movie-card" data-category="sci-fi">
+                    <div class="movie-poster">
+                        <img src="https://picsum.photos/id/1074/600/900" alt="电影《星际穿越》海报">
+                        <div class="movie-rating">
+                            <i class="fas fa-star"></i> 9.3
+                        </div>
+                    </div>
+                    <div class="movie-info">
+                        <span class="movie-category">科幻片</span>
+                        <h3>星际穿越</h3>
+                        <div class="movie-year">2014</div>
+                        <p class="movie-description">讲述了一队探险家通过穿越虫洞寻找人类新家园的冒险故事，探讨了爱与时间的深刻主题。</p>
+                        <div class="movie-insights">
+                            <h4><i class="fas fa-lightbulb"></i> 我的见解</h4>
+                            <p>影片对时间和空间的想象极为大胆，同时又充满人文关怀。这种将宏大叙事与个人情感结合的方式，值得在策展中借鉴。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 电影感悟部分 -->
+    <section class="movie-thoughts">
+        <div class="container">
+            <h2 class="section-title">电影与策展的思考</h2>
+            <div class="thoughts-container">
+                <div class="thoughts-item">
+                    <div class="thoughts-header">
+                        <div class="thoughts-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <div class="thoughts-title">
+                            <h3>叙事结构的启发</h3>
+                            <p>电影叙事与展览叙事的共通之处</p>
+                        </div>
+                    </div>
+                    <div class="thoughts-content">
+                        <p>好的电影往往有精心设计的叙事结构，从开场、发展、高潮到结局，引导观众的情感起伏。这与策展工作中展品的排列顺序、空间的引导设计有着异曲同工之妙。</p>
+                        <p>我常常从电影的叙事节奏中获得展览动线设计的灵感。比如，在策划一个主题展览时，可以借鉴电影中的"闪回"手法，通过时间线的交错安排，让观众获得更丰富的体验。</p>
+                        <p>另外，电影中的"视角"概念也给我很多启发。不同的镜头角度会给观众带来不同的心理感受，这与展览中展品的摆放高度、观看距离的设计原理是相通的。</p>
+                    </div>
+                </div>
+                
+                <div class="thoughts-item">
+                    <div class="thoughts-header">
+                        <div class="thoughts-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div class="thoughts-title">
+                            <h3>视觉美学的借鉴</h3>
+                            <p>电影视觉语言对展览设计的影响</p>
+                        </div>
+                    </div>
+                    <div class="thoughts-content">
+                        <p>电影的构图、色彩、光影处理等视觉元素，对我设计展览空间有着直接的影响。比如，《布达佩斯大饭店》中鲜明的色彩对比和对称构图，启发我在一些主题展览中尝试更大胆的色彩运用。</p>
+                        <p>科幻电影中对未来空间的想象，则为我设计具有未来感的展览提供了丰富的素材。光影的运用尤其重要，电影中常用的侧光、逆光等手法，能够创造出强烈的空间感和氛围感，这在展览设计中同样适用。</p>
+                        <p>此外，电影中的场景转换方式，如淡入淡出、叠化等，也可以转化为展览中不同展区之间的过渡设计，使整个展览体验更加流畅。</p>
+                    </div>
+                </div>
+                
+                <div class="thoughts-item">
+                    <div class="thoughts-header">
+                        <div class="thoughts-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="thoughts-title">
+                            <h3>观众体验的设计</h3>
+                            <p>从电影观众到展览观众的体验设计思考</p>
+                        </div>
+                    </div>
+                    <div class="thoughts-content">
+                        <p>电影导演常常会思考如何引导观众的情绪和注意力，这种思考同样适用于策展工作。一个好的展览，应该像一部好的电影一样，能够引导观众的情绪变化，让他们在参观过程中获得丰富的情感体验。</p>
+                        <p>沉浸式电影的兴起也给我带来了新的思考。如何让观众从被动观看转变为主动参与，如何创造更具沉浸感的展览体验，这些都是我在策划展览时经常思考的问题。</p>
+                        <p>电影中的配乐对情绪的引导作用也给我启发，在一些展览中，适当的声音设计能够极大地增强展览的氛围和感染力，让观众获得更全面的感官体验。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚部分 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Chopiglat</h2>
+                    <p>猪鼓励IP官方平台</p>
+                </div>
+                <div class="footer-social">
+                    <a href="weixin://dl/chat?Victor-hheelloo" class="social-icon" title="微信"><i class="fab fa-weixin"></i></a>
+                    <a href="https://www.xiaohongshu.com/user/profile/2662848827" class="social-icon" title="小红书"><i class="fab fa-redhat"></i></a>
+                    <a href="mailto:zhuweitao370@gmail.com" class="social-icon" title="邮箱"><i class="fas fa-envelope"></i></a>
+                    <a href="tel:+861736825814" class="social-icon" title="电话"><i class="fas fa-phone"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Chopiglat. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <script>
+        // 导航菜单切换
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // 返回顶部按钮
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 电影筛选功能
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const movieCards = document.querySelectorAll('.movie-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // 移除所有按钮的active类
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // 给当前点击的按钮添加active类
+                button.classList.add('active');
+                
+                const filter = button.getAttribute('data-filter');
+                
+                // 筛选电影卡片
+                movieCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+    
